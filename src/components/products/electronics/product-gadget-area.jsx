@@ -102,7 +102,7 @@ const ProductGadgetArea = () => {
   }
   return (
     <>
-      <section className="tp-product-gadget-area pt-80 pb-75">
+      <section className="tp-product-gadget-area pb-75">
         <div className="container">
           <div className="row">
             <div className="col-xl-4 col-lg-5">

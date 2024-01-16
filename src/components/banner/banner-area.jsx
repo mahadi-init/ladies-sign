@@ -11,7 +11,7 @@ function BannerItem({ sm = false, bg, title }) {
     <div
       className={`tp-banner-item ${
         sm ? "tp-banner-item-sm" : ""
-      } tp-banner-height p-relative mb-30 z-index-1 fix`}
+      } tp-banner-height p-relative mb-10 z-index-1 fix`}
     >
       <div
         className="tp-banner-thumb include-bg transition-3"
