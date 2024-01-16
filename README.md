@@ -1,8 +1,6 @@
-# Shofy frontend-site
+# Ladies-sign
 
 Build with NextJs, Redux, Clerk & Stripe
-
-![homepage](./screenshot/home.png)
 
 ### Key Features
 
