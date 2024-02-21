@@ -35,8 +35,16 @@ const Footer = ({
                 <div className="tp-footer-widget footer-col-1 mb-50">
                   <div className="tp-footer-widget-content">
                     <div className="tp-footer-logo">
-                      <Link href="/">
-                        <Image src={logo} alt="logo" />
+                      <Link
+                        href="/"
+                        style={{
+                          fontFamily: "sans-serif",
+                          fontWeight: "bold",
+                          fontSize: "1.6rem",
+                          color: "black",
+                        }}
+                      >
+                        Ladies Sign.
                       </Link>
                     </div>
                     <p className="tp-footer-desc">
@@ -126,8 +134,8 @@ const Footer = ({
                         </div>
                         <div className="tp-footer-contact-content">
                           <p>
-                            <a href="mailto:shofy@support.com">
-                              renayeem@gmail.com
+                            <a href="mailto:ladiessign@gmail.com">
+                              ladiessign@gmail.com
                             </a>
                           </p>
                         </div>
@@ -141,10 +149,10 @@ const Footer = ({
                         <div className="tp-footer-contact-content">
                           <p>
                             <a
-                              href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4"
+                              href="https://maps.app.goo.gl/aifKbuKhnJN7cBeBA"
                               target="_blank"
                             >
-                              79 Sleepy Hollow St. <br /> 1432
+                              Akanada bari <br /> Jamalpur, Bangladesh
                             </a>
                           </p>
                         </div>
@@ -162,9 +170,7 @@ const Footer = ({
               <div className="row align-items-center">
                 <div className="col-md-6">
                   <div className="tp-footer-copyright">
-                    <p>
-                      © {new Date().getFullYear()} All Rights Reserved 
-                    </p>
+                    <p>© {new Date().getFullYear()} All Rights Reserved</p>
                   </div>
                 </div>
                 <div className="col-md-6">

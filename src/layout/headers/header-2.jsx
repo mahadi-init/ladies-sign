@@ -36,33 +36,6 @@ const HeaderTwo = ({ style_2 = false }) => {
             style_2 ? "primary" : "darkRed"
           } tp-header-height`}
         >
-          <div className="tp-header-top-2 p-relative z-index-11 tp-header-top-border d-none d-md-block">
-            <div className="container">
-              <div className="row align-items-center">
-                <div className="col-md-6">
-                  <div className="tp-header-info d-flex align-items-center">
-                    <div className="tp-header-info-item">
-                      <a href="#">
-                        <span>
-                          <Facebook />
-                        </span>
-                        7500k Followers
-                      </a>
-                    </div>
-                    <div className="tp-header-info-item">
-                      <a href="tel:402-763-282-46">
-                        <span>
-                          <PhoneTwo />
-                        </span>{" "}
-                        +(966) 595 035 008
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div
             id="header-sticky"
             className={`tp-header-bottom-2 tp-header-sticky ${
@@ -74,8 +47,32 @@ const HeaderTwo = ({ style_2 = false }) => {
                 <div className="row align-items-center">
                   <div className="col-xl-2 col-lg-5 col-md-5 col-sm-4 col-6">
                     <div className="logo">
-                      <Link href="/">
-                        <Image src={logo} alt="logo" priority />
+                      <Link
+                        href="/"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          src={"/assets/img/logo/logo.png"}
+                          alt="logo"
+                          width={500}
+                          height={500}
+                          style={{ maxWidth: "20%", height: "auto" }}
+                        />
+                        <p
+                          style={{
+                            fontFamily: "sans-serif",
+                            fontWeight: "bold",
+                            fontSize: "1.2rem",
+                            marginLeft: "10px",
+                            marginTop: "15px",
+                            color: "black",
+                          }}
+                        >
+                          Ladies Sign
+                        </p>
                       </Link>
                     </div>
                   </div>

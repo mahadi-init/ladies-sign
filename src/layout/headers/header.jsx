@@ -32,8 +32,32 @@ const Header = () => {
               <div className="row align-items-center">
                 <div className="col-xl-2 col-lg-2 col-md-4 col-6">
                   <div className="logo">
-                    <Link href="/">
-                      <Image src={logo} alt="logo" />
+                    <Link
+                      href="/"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Image
+                        src={"/assets/img/logo/logo.png"}
+                        alt="logo"
+                        width={500}
+                        height={500}
+                        style={{ maxWidth: "20%", height: "auto" }}
+                      />
+                      <p
+                        style={{
+                          marginLeft: "10px",
+                          marginTop: "12px",
+                          fontWeight: "bold",
+                          fontSize: "1.2rem",
+                          color: "black",
+                          fontFamily: "sans-serif",
+                        }}
+                      >
+                        Ladies Sign
+                      </p>
                     </Link>
                   </div>
                 </div>
@@ -114,8 +138,32 @@ const Header = () => {
             <div className="row align-items-center">
               <div className="col-xl-3 col-lg-3 col-md-3 col-6">
                 <div className="logo">
-                  <Link href="/">
-                    <Image src={logo} alt="logo" />
+                  <Link
+                    href="/"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image
+                      src={"/assets/img/logo/logo.png"}
+                      alt="logo"
+                      width={500}
+                      height={500}
+                      style={{ maxWidth: "20%", height: "auto" }}
+                    />
+                    <p
+                      style={{
+                        marginLeft: "10px",
+                        marginTop: "12px",
+                        fontWeight: "bold",
+                        fontSize: "1.2rem",
+                        color: "black",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      Ladies Sign
+                    </p>
                   </Link>
                 </div>
               </div>
