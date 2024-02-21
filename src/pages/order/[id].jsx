@@ -65,7 +65,33 @@ const SingleOrder = ({ params }) => {
                       <div className="row align-items-end">
                         <div className="col-md-4 col-sm-6">
                           <div className="invoice__left">
-                            <Image src={logo} alt="logo" />
+                            <div
+                              href="/"
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Image
+                                src={"/assets/img/logo/logo.png"}
+                                alt="logo"
+                                width={500}
+                                height={500}
+                                style={{ maxWidth: "20%", height: "auto" }}
+                              />
+                              <p
+                                style={{
+                                  marginLeft: "10px",
+                                  marginTop: "12px",
+                                  fontWeight: "bold",
+                                  fontSize: "1.2rem",
+                                  color: "black",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                                Ladies Sign
+                              </p>
+                            </div>
                             <p>
                               2879 Elk Creek Road <br /> Stone Mountain, Georgia{" "}
                             </p>
