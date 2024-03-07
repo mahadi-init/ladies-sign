@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 // internal
-import logo from "@assets/img/logo/logo.svg";
 import pay from "@assets/img/footer/footer-pay-3.png";
 import social_data from "@/data/social-data";
 import { Email, Location } from "@/svg";
@@ -175,9 +174,7 @@ const Footer = ({
                 </div>
                 <div className="col-md-6">
                   <div className="tp-footer-payment text-md-end">
-                    <p>
-                      <Image width={260} height={45} src={pay} alt="pay" />
-                    </p>
+                    <Image width={260} height={45} src={pay} alt="pay" />
                   </div>
                 </div>
               </div>

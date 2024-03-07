@@ -1,11 +1,9 @@
 import React from "react";
 import ErrorMsg from "../common/error-msg";
-import { useSelector } from "react-redux";
-import { useSession } from "@clerk/nextjs";
 
 const CheckoutBillingArea = ({ register, errors }) => {
-  const { user } = useSelector((state) => state.auth);
-  const session = useSession();
+  // const { user } = useSelector((state) => state.auth);
+  // const session = useSession();
 
   return (
     <div className="tp-checkout-bill-area">
@@ -27,7 +25,6 @@ const CheckoutBillingArea = ({ register, errors }) => {
                   id="firstName"
                   type="text"
                   placeholder="First Name"
-                  defaultValue={session?.session.user.firstName}
                 />
                 <ErrorMsg msg={errors?.firstName?.message} />
               </div>
@@ -45,12 +42,11 @@ const CheckoutBillingArea = ({ register, errors }) => {
                   id="lastName"
                   type="text"
                   placeholder="Last Name"
-                  defaultValue={session?.session.user.lastName}
                 />
                 <ErrorMsg msg={errors?.lastName?.message} />
               </div>
             </div>
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
                   Country <span>*</span>
@@ -64,46 +60,7 @@ const CheckoutBillingArea = ({ register, errors }) => {
                 />
                 <ErrorMsg msg={errors?.lastName?.message} />
               </div>
-            </div>
-            <div className="col-md-12">
-              <div className="tp-checkout-input">
-                <label>Street address</label>
-                <input
-                  {...register("address", { required: `Address is required!` })}
-                  name="address"
-                  id="address"
-                  type="text"
-                  placeholder="House number and street name"
-                />
-                <ErrorMsg msg={errors?.address?.message} />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="tp-checkout-input">
-                <label>Town / City</label>
-                <input
-                  {...register("city", { required: `City is required!` })}
-                  name="city"
-                  id="city"
-                  type="text"
-                  placeholder="City"
-                />
-                <ErrorMsg msg={errors?.city?.message} />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="tp-checkout-input">
-                <label>Postcode ZIP</label>
-                <input
-                  {...register("zipCode", { required: `zipCode is required!` })}
-                  name="zipCode"
-                  id="zipCode"
-                  type="text"
-                  placeholder="Postcode ZIP"
-                />
-                <ErrorMsg msg={errors?.zipCode?.message} />
-              </div>
-            </div>
+            </div> */}
             <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
@@ -124,8 +81,22 @@ const CheckoutBillingArea = ({ register, errors }) => {
             <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
-                  Alternative Phone (recommended)
+                  Full Address <span>*</span>
                 </label>
+                <input
+                  {...register("address", { required: `Address is required!` })}
+                  name="address"
+                  id="address"
+                  type="text"
+                  placeholder="#32 Flat 2, Dhanmondi 32, Dhaka"
+                />
+                <ErrorMsg msg={errors?.address?.message} />
+              </div>
+            </div>
+
+            {/* <div className="col-md-12">
+              <div className="tp-checkout-input">
+                <label>Alternative Phone (recommended)</label>
                 <input
                   {...register("alternativeContactNo", { required: false })}
                   name="contactNo"
@@ -134,8 +105,8 @@ const CheckoutBillingArea = ({ register, errors }) => {
                   placeholder="Alternative Phone"
                 />
               </div>
-            </div>
-            <div className="col-md-12">
+            </div> */}
+            {/* <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
                   Email address <span>*</span>
@@ -150,7 +121,7 @@ const CheckoutBillingArea = ({ register, errors }) => {
                 />
                 <ErrorMsg msg={errors?.email?.message} />
               </div>
-            </div>
+            </div> */}
             <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>Order notes (optional)</label>

@@ -3,9 +3,8 @@ import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 // internal
-import { AskQuestion, CompareTwo, WishlistTwo } from "@/svg";
+import { CompareTwo, WishlistTwo } from "@/svg";
 import DetailsBottomInfo from "./details-bottom-info";
-import ProductDetailsCountdown from "./product-details-countdown";
 import ProductQuantity from "./product-quantity";
 import { add_cart_product } from "@/redux/features/cartSlice";
 import { add_to_wishlist } from "@/redux/features/wishlist-slice";
@@ -20,7 +19,6 @@ const DetailsWrapper = ({
 }) => {
   const {
     sku,
-    img,
     title,
     imageURLs,
     category,
@@ -30,7 +28,6 @@ const DetailsWrapper = ({
     status,
     reviews,
     tags,
-    offerDate,
   } = productItem || {};
   const [ratingVal, setRatingVal] = useState(0);
   const [textMore, setTextMore] = useState(false);
@@ -149,12 +146,6 @@ const DetailsWrapper = ({
         </div>
       )}
 
-      {/* if ProductDetailsCountdown true start */}
-      {offerDate?.endDate && (
-        <ProductDetailsCountdown offerExpiryTime={offerDate?.endDate} />
-      )}
-      {/* if ProductDetailsCountdown true end */}
-
       {/* actions */}
       <div className="tp-product-details-action-wrapper">
         <h3 className="tp-product-details-action-title">Quantity</h3>
@@ -197,10 +188,6 @@ const DetailsWrapper = ({
         >
           <WishlistTwo />
           Add Wishlist
-        </button>
-        <button type="button" className="tp-product-details-action-sm-btn">
-          <AskQuestion />
-          Ask a question
         </button>
       </div>
       {/* product-details-action-sm end */}

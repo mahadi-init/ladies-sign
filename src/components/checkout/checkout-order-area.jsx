@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { CardElement } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 // internal
 import useCartInfo from "@/hooks/use-cart-info";
@@ -11,22 +9,13 @@ const CheckoutOrderArea = ({ checkoutData }) => {
     cartTotal = 0,
     stripe,
     isCheckoutSubmit,
-    clientSecret,
     register,
     errors,
-    showCard,
-    setShowCard,
     shippingCost,
     discountAmount,
   } = checkoutData;
   const { cart_products } = useSelector((state) => state.cart);
   const { total } = useCartInfo();
-
-  const [selectedOption, setSelectedOption] = useState("bkash");
-
-  const handleButtonClick = (option) => {
-    setSelectedOption(option);
-  };
 
   return (
     <div className="tp-checkout-place white-bg">
@@ -81,7 +70,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
                   name="shippingOption"
                 />
                 <label
-                  onClick={() => handleShippingCost(20)}
+                  onClick={() => handleShippingCost(120)}
                   htmlFor="flat_rate"
                 >
                   Delivery: Outside Dhaka City: <span>৳120.00</span>
@@ -173,55 +162,6 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           <ErrorMsg msg={errors?.payment?.message} />
         </div>
       </div> */}
-
-      <div>
-      <h1>Select an Option</h1>
-      
-      <div className="payment-options">
-        <button onClick={() => handleButtonClick("bkash")} className={selectedOption === "bkash" ? "selected" : "unselected"}>
-          bKash
-        </button>
-        <button onClick={() => handleButtonClick("nagad")} className={selectedOption === "nagad" ? "selected" : "unselected"}>
-          Nagad
-        </button>
-        <button onClick={() => handleButtonClick("rocket")} className={selectedOption === "rocket" ? "selected" : "unselected"}>
-          Rocket
-        </button>
-      </div>
-      
-      <div className="result">
-        {selectedOption === "bkash" && <div>
-            <p>1. Open the bKash app or dial *247#.</p>
-            <p>2. Choose send money.</p>
-            <p>3. Enter 0000000000.</p>
-            <p>4. Enter {parseFloat(cartTotal).toFixed(2)} tk as the amount.</p>
-            <p>5. Note the Transaction ID.</p>
-            <p>6. Drop your transaction ID and bKash number here.</p>
-            <input required type="text" placeholder="bKash Number" className="input-payment-1" />
-            <input required type="text" placeholder="bKash Transaction ID" />
-          </div>}
-        {selectedOption === "nagad" && <div>
-            <p>1. Open the Nagad app or dial *167#.</p>
-            <p>2. Choose send money.</p>
-            <p>3. Enter 0000000000.</p>
-            <p>4. Enter {parseFloat(cartTotal).toFixed(2)} tk as the amount.</p>
-            <p>5. Note the Transaction ID.</p>
-            <p>6. Drop your transaction ID and Nagad number here.</p>
-            <input required type="text" placeholder="Nagad Number" className="input-payment-1" />
-            <input required type="text" placeholder="Nagad Transaction ID" />
-          </div>}
-        {selectedOption === "rocket" && <div>
-            <p>1. Open the Rocket app or dial *322#.</p>
-            <p>2. Choose send money.</p>
-            <p>3. Enter 0000000000.</p>
-            <p>4. Enter {parseFloat(cartTotal).toFixed(2)} tk as the amount.</p>
-            <p>5. Note the Transaction ID.</p>
-            <p>6. Drop your transaction ID and Rocket number here.</p>
-            <input required type="text" placeholder="Rocket Number" className="input-payment-1" />
-            <input required type="text" placeholder="Rocket Transaction ID" />
-          </div>}
-      </div>
-      </div>
 
       <div className="tp-checkout-btn-wrapper">
         <button

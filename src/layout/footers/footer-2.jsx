@@ -179,9 +179,7 @@ const FooterTwo = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="tp-footer-payment text-md-end">
-                      <p>
-                        <Image src={pay} alt="pay" />
-                      </p>
+                      <Image src={pay} alt="pay" />
                     </div>
                   </div>
                 </div>
