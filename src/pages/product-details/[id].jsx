@@ -11,7 +11,7 @@ import ProductDetailsArea from "@/components/product-details/product-details-are
 import PrdDetailsLoader from "@/components/loader/prd-details-loader";
 
 const ProductDetailsPage = ({ query }) => {
-  const { data: product, isLoading, isError } = useGetProductQuery(query.id);
+  const { data: result, isLoading, isError } = useGetProductQuery(query.id);
   // decide what to render
   let content = null;
   if (isLoading) {
@@ -20,7 +20,9 @@ const ProductDetailsPage = ({ query }) => {
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
   }
-  if (!isLoading && !isError && product) {
+  if (!isLoading && !isError && result) {
+    let product = result.data;
+
     content = (
       <>
         <ProductDetailsBreadcrumb

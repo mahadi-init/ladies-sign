@@ -20,7 +20,7 @@ const DetailsWrapper = ({
   const {
     sku,
     title,
-    imageURLs,
+    images,
     category,
     description,
     discount,
@@ -65,7 +65,6 @@ const DetailsWrapper = ({
         <span>{category.name}</span>
       </div>
       <h3 className="tp-product-details-title">{title}</h3>
-
       {/* inventory details */}
       <div className="tp-product-details-inventory d-flex align-items-center mb-10">
         <div className="tp-product-details-stock mb-10">
@@ -93,7 +92,6 @@ const DetailsWrapper = ({
           {textMore ? "See less" : "See more"}
         </span>
       </p>
-
       {/* price */}
       <div className="tp-product-details-price-wrapper mb-20">
         {discount > 0 ? (
@@ -114,14 +112,13 @@ const DetailsWrapper = ({
           </span>
         )}
       </div>
-
       {/* variations */}
-      {imageURLs.some((item) => item?.color && item?.color?.name) && (
+      {images.some((item) => item?.color && item?.color) && (
         <div className="tp-product-details-variation">
           <div className="tp-product-details-variation-item">
             <h4 className="tp-product-details-variation-title">Color :</h4>
             <div className="tp-product-details-variation-list">
-              {imageURLs.map((item, i) => (
+              {images.map((item, i) => (
                 <button
                   onClick={() => handleImageActive(item)}
                   key={i}
@@ -132,11 +129,11 @@ const DetailsWrapper = ({
                 >
                   <span
                     data-bg-color={`${item.color.clrCode}`}
-                    style={{ backgroundColor: `${item.color.clrCode}` }}
+                    style={{ backgroundColor: `${item.color}` }}
                   ></span>
-                  {item.color && item.color.name && (
+                  {item.color && item.name && (
                     <span className="tp-color-variation-tootltip">
-                      {item.color.name}
+                      {item.color}
                     </span>
                   )}
                 </button>
@@ -145,7 +142,6 @@ const DetailsWrapper = ({
           </div>
         </div>
       )}
-
       {/* actions */}
       <div className="tp-product-details-action-wrapper">
         <h3 className="tp-product-details-action-title">Quantity</h3>
@@ -191,7 +187,6 @@ const DetailsWrapper = ({
         </button>
       </div>
       {/* product-details-action-sm end */}
-
       {detailsBottom && (
         <DetailsBottomInfo category={category?.name} sku={sku} tag={tags[0]} />
       )}
