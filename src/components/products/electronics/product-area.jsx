@@ -15,7 +15,6 @@ const ProductArea = () => {
     isLoading,
     refetch,
   } = useGetProductTypeQuery({
-    type: "electronics",
     query: `${activeTab}=true`,
   });
   // handleActiveTab

@@ -19,8 +19,8 @@ const DetailsWrapper = ({
 }) => {
   const {
     sku,
-    title,
-    images,
+    name,
+    variants,
     category,
     description,
     discount,
@@ -62,9 +62,9 @@ const DetailsWrapper = ({
   return (
     <div className="tp-product-details-wrapper">
       <div className="tp-product-details-category">
-        <span>{category.name}</span>
+        <span>{category?.name}</span>
       </div>
-      <h3 className="tp-product-details-title">{title}</h3>
+      <h3 className="tp-product-details-title">{name}</h3>
       {/* inventory details */}
       <div className="tp-product-details-inventory d-flex align-items-center mb-10">
         <div className="tp-product-details-stock mb-10">
@@ -113,12 +113,12 @@ const DetailsWrapper = ({
         )}
       </div>
       {/* variations */}
-      {images.some((item) => item?.color && item?.color) && (
+      {variants?.some((item) => item?.color && item?.color) && (
         <div className="tp-product-details-variation">
           <div className="tp-product-details-variation-item">
             <h4 className="tp-product-details-variation-title">Color :</h4>
             <div className="tp-product-details-variation-list">
-              {images.map((item, i) => (
+              {variants.map((item, i) => (
                 <button
                   onClick={() => handleImageActive(item)}
                   key={i}
@@ -128,10 +128,10 @@ const DetailsWrapper = ({
                   }`}
                 >
                   <span
-                    data-bg-color={`${item.color.clrCode}`}
+                    data-bg-color={`${item.color}`}
                     style={{ backgroundColor: `${item.color}` }}
                   ></span>
-                  {item.color && item.name && (
+                  {item.color && (
                     <span className="tp-color-variation-tootltip">
                       {item.color}
                     </span>
@@ -142,7 +142,7 @@ const DetailsWrapper = ({
           </div>
         </div>
       )}
-      {/* actions */}
+      actions
       <div className="tp-product-details-action-wrapper">
         <h3 className="tp-product-details-action-title">Quantity</h3>
         <div className="tp-product-details-action-item-wrapper d-sm-flex align-items-center">

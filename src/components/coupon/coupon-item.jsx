@@ -9,11 +9,16 @@ import { InfoDetails } from "@/svg";
 const CouponItem = ({ coupon, handleCopied, copiedCode, copied }) => {
   return (
     <div className="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
-      <span className="tp-coupon-border"></span>
+      <span
+        className="tp-coupon-border"
+        style={{ paddingLeft: "20px", paddingTop: "5px" }}
+      >
+        {coupon.title}
+      </span>
       <div className="tp-coupon-item-left d-sm-flex align-items-center">
         <div className="tp-coupon-thumb">
           <a href="#">
-            <Image src={coupon.logo} alt="logo" width={120} height={120} />
+            <Image src={coupon.img} alt="logo" width={120} height={120} />
           </a>
         </div>
         <div className="tp-coupon-content">
@@ -64,8 +69,8 @@ const CouponItem = ({ coupon, handleCopied, copiedCode, copied }) => {
             <div className="tp-coupon-info-tooltip transition-3">
               <p>
                 *This coupon code will apply on{" "}
-                <span>Grocery type products</span> and when you shopping more
-                than <span>৳{coupon.minimumAmount}</span>
+                <span>{coupon.productType} products</span> and when you shopping
+                more than <span>৳{coupon.minimumAmount}</span>
               </p>
             </div>
           </div>

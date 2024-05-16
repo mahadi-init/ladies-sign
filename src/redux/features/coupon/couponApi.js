@@ -8,7 +8,7 @@ export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // get offer coupon
     getOfferCoupons: builder.query({
-      query: () => `${url}/api/coupon`,
+      query: () => `${url}/coupon/all`,
       providesTags: ["Coupon"],
       keepUnusedDataFor: 600,
     }),

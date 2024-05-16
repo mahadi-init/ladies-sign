@@ -7,6 +7,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "res.cloudinary.com",
       "scontent.fdac24-2.fna.fbcdn.net",
+      "utfs.io",
     ],
   },
 };

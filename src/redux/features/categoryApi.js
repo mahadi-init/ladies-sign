@@ -8,16 +8,16 @@ export const categoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     addCategory: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/category/add`,
+        url: `${url}/category/add`,
         method: "POST",
         body: data,
       }),
     }),
-    getShowCategory: builder.query({
-      query: () => `${url}/api/category/show`,
+    getActiveCategory: builder.query({
+      query: () => `${url}/category/active`,
     }),
     getProductTypeCategory: builder.query({
-      query: (type) => `${url}/api/category/show/${type}`,
+      query: (type) => `${url}/category/active/${type}`,
     }),
   }),
 });
@@ -25,5 +25,5 @@ export const categoryApi = apiSlice.injectEndpoints({
 export const {
   useAddCategoryMutation,
   useGetProductTypeCategoryQuery,
-  useGetShowCategoryQuery,
+  useGetActiveCategoryQuery,
 } = categoryApi;

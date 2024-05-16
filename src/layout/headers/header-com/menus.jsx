@@ -1,9 +1,10 @@
 import React from "react";
 import menu_data from "@/data/menu-data";
 import Link from "next/link";
-import Image from "next/image";
-import OfferCouponArea from "@/components/offerHeader/OfferCouponArea";
-import { useGetProductTypeQuery } from "@/redux/features/productApi";
+import {
+  useGetAllProductsQuery,
+  useGetProductTypeQuery,
+} from "@/redux/features/productApi";
 import { HomeNewArrivalPrdLoader } from "@/components/loader";
 import ErrorMsg from "@/components/common/error-msg";
 import ProductItem from "@/components/products/electronics/product-item";
@@ -13,7 +14,7 @@ const Menus = () => {
     data: products,
     isError,
     isLoading,
-  } = useGetProductTypeQuery({
+  } = useGetAllProductsQuery({
     type: "electronics",
     query: "new=true",
   });

@@ -16,7 +16,7 @@ const ProductItem = ({ product, offer_style = false }) => {
     _id,
     img,
     category,
-    title,
+    name,
     reviews,
     price,
     discount,
@@ -69,7 +69,7 @@ const ProductItem = ({ product, offer_style = false }) => {
             />
 
             <div className="tp-product-badge">
-              {status === "out-of-stock" && (
+              {status === "OUT-OF-STOCK" && (
                 <span className="product-hot">out-stock</span>
               )}
             </div>
@@ -130,7 +130,7 @@ const ProductItem = ({ product, offer_style = false }) => {
             <a href="#">{category?.name}</a>
           </div>
           <h3 className="tp-product-title">
-            <Link href={`/product-details/${_id}`}>{title}</Link>
+            <Link href={`/product-details/${_id}`}>{name}</Link>
           </h3>
           <div className="tp-product-rating d-flex align-items-center">
             <div className="tp-product-rating-icon">

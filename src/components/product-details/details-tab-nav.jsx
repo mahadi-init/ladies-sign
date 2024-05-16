@@ -3,7 +3,7 @@ import ReviewForm from "../forms/review-form";
 import ReviewItem from "./review-item";
 
 const DetailsTabNav = ({ product }) => {
-  const { _id, description, additionalInformation, reviews } = product || {};
+  const { cid, description, additionalInformation, reviews } = product || {};
   const activeRef = useRef(null);
   const marker = useRef(null);
   // handleActive
@@ -154,7 +154,7 @@ const DetailsTabNav = ({ product }) => {
                       are marked *
                     </p>
                     {/* form start */}
-                    <ReviewForm product_id={_id} />
+                    <ReviewForm product_id={cid} />
                     {/* form end */}
                   </div>
                 </div>

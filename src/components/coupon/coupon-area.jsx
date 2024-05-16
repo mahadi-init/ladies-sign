@@ -17,6 +17,7 @@ const CouponArea = () => {
   };
 
   const { data: offerCoupons, isError, isLoading } = useGetOfferCouponsQuery();
+
   // decide what to render
   let content = null;
 
@@ -28,12 +29,13 @@ const CouponArea = () => {
     content = <ErrorMsg msg="There was an error" />;
   }
 
-  if (!isLoading && !isError && offerCoupons?.length === 0) {
+  if (!isLoading && !isError && offerCoupons.data?.length === 0) {
     content = <ErrorMsg msg="No Coupons found!" />;
   }
 
-  if (!isLoading && !isError && offerCoupons?.length > 0) {
-    const coupon_items = offerCoupons;
+  if (!isLoading && !isError && offerCoupons.data?.length > 0) {
+    const coupon_items = offerCoupons.data;
+    console.log(coupon_items);
     // const coupon_items = offerCoupons.slice(0, 2);
     content = coupon_items.map((coupon) => (
       <div key={coupon._id} className="col-xl-6">

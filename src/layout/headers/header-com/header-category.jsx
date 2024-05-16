@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 // internal
-import { useGetProductTypeCategoryQuery } from "@/redux/features/categoryApi";
+import { useGetActiveCategoryQuery } from "@/redux/features/categoryApi";
 import ErrorMsg from "@/components/common/error-msg";
 import Loader from "@/components/loader/loader";
 
@@ -11,14 +11,16 @@ const HeaderCategory = ({ isCategoryActive, categoryType = "electronics" }) => {
     data: categories,
     isError,
     isLoading,
-  } = useGetProductTypeCategoryQuery(categoryType);
+  } = useGetActiveCategoryQuery(categoryType);
   const router = useRouter();
 
+  console.table(categories);
+
   // handle category route
-  const handleCategoryRoute = (title, route) => {
-    if (route === "parent") {
+  const handleCategoryRoute = (name, route) => {
+    if (route === "name") {
       router.push(
-        `/shop?category=${title
+        `/shop?category=${name
           .toLowerCase()
           .replace("&", "")
           .split(" ")
@@ -26,7 +28,7 @@ const HeaderCategory = ({ isCategoryActive, categoryType = "electronics" }) => {
       );
     } else {
       router.push(
-        `/shop?subCategory=${title
+        `/shop?subCategory=${name
           .toLowerCase()
           .replace("&", "")
           .split(" ")
@@ -47,23 +49,23 @@ const HeaderCategory = ({ isCategoryActive, categoryType = "electronics" }) => {
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
   }
-  if (!isLoading && !isError && categories?.result?.length === 0) {
+  if (!isLoading && !isError && categories?.data?.length === 0) {
     content = <ErrorMsg msg="No Category found!" />;
   }
-  if (!isLoading && !isError && categories?.result?.length > 0) {
-    const category_items = categories.result;
+  if (!isLoading && !isError && categories?.data?.length > 0) {
+    const category_items = categories.data;
     content = category_items.map((item) => (
       <li className="has-dropdown" key={item._id}>
         <a
           className="cursor-pointer"
-          onClick={() => handleCategoryRoute(item.parent, "parent")}
+          onClick={() => handleCategoryRoute(item.name, "name")}
         >
           {item.img && (
             <span>
               <Image src={item.img} alt="cate img" width={50} height={50} />
             </span>
           )}
-          {item.parent}
+          {item.name}
         </a>
 
         {item.children && (
