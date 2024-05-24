@@ -12,7 +12,7 @@ import { useRegisterUserMutation } from "@/redux/features/auth/authApi";
 // schema
 const schema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
-  email: Yup.string().required().email().label("Email"),
+  phone: Yup.string().required().label("Phone"),
   password: Yup.string().required().min(6).label("Password"),
   remember: Yup.bool()
     .oneOf([true], "You must agree to the terms and conditions to proceed.")
@@ -37,14 +37,14 @@ const RegisterForm = () => {
   const onSubmit = (data) => {
     registerUser({
       name: data.name,
-      email: data.email,
+      phone: data.phone,
       password: data.password,
     }).then((result) => {
       if (result?.error) {
         notifyError("Register Failed");
       } else {
-        notifySuccess(result?.data?.message);
-        // router.push(redirect || "/");
+        notifySuccess("Registration Successful");
+        router.push(redirect || "/");
       }
     });
     reset();
@@ -70,17 +70,17 @@ const RegisterForm = () => {
         <div className="tp-login-input-box">
           <div className="tp-login-input">
             <input
-              {...register("email", { required: `Email is required!` })}
-              id="email"
-              name="email"
-              type="email"
-              placeholder="xyz@gmail.com"
+              {...register("phone", { required: `Phone is required!` })}
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="0172345678"
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="email">Your Email</label>
+            <label htmlFor="phone">Your Phone</label>
           </div>
-          <ErrorMsg msg={errors.email?.message} />
+          <ErrorMsg msg={errors.phone?.message} />
         </div>
         <div className="tp-login-input-box">
           <div className="p-relative">

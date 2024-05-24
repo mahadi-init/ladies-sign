@@ -31,13 +31,12 @@ const ProductBrand = ({ setCurrPage, shop_right = false }) => {
     content = <ShopBrandLoader loading={isLoading} />;
   } else if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
-  } else if (!isLoading && !isError && brands?.result?.length === 0) {
+  } else if (!isLoading && !isError && brands?.data?.length === 0) {
     content = <ErrorMsg msg="No Brands found!" />;
-  } else if (!isLoading && !isError && brands?.result?.length > 0) {
-    const all_brands = brands.result;
-    const sortedBrands = all_brands
-      .slice()
-      .sort((a, b) => b.products.length - a.products.length);
+  } else if (!isLoading && !isError && brands?.data?.length > 0) {
+    const all_brands = brands.data;
+    const sortedBrands = all_brands.slice();
+    // .sort((a, b) => b.products.length - a.products.length);
     const brand_items = sortedBrands.slice(0, 6);
 
     content = brand_items.map((b) => (
@@ -46,7 +45,7 @@ const ProductBrand = ({ setCurrPage, shop_right = false }) => {
           onClick={() => handleBrandRoute(b.name)}
           style={{ cursor: "pointer" }}
         >
-          <Image src={b.logo} alt="brand" width={60} height={50} />
+          <Image src={b.img} alt="brand" width={60} height={50} />
         </a>
       </div>
     ));

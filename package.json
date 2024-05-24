@@ -1,5 +1,5 @@
 {
-  "name": "Ladies Sign",
+  "name": "ladies-sign",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/express": "^0.5.5",
     "@clerk/nextjs": "^4.29.1",
     "@hookform/resolvers": "^3.1.0",
     "@popperjs/core": "^2.11.6",
@@ -45,6 +46,7 @@
     "sharp": "^0.33.2",
     "slick-carousel": "^1.8.1",
     "swiper": "^9.1.1",
+    "swr": "^2.2.5",
     "yup": "^1.1.1"
   },
   "devDependencies": {

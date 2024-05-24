@@ -38,36 +38,36 @@ const ColorFilter = ({ setCurrPage, shop_right = false }) => {
   }
   if (!isLoading && !isError && products?.data?.length > 0) {
     const product_items = products.data;
-    let allColor = [];
-    product_items.forEach((product) => {
-      let uniqueColor = new Set(product.imageURLs.map((item) => item?.color));
-      allColor = [...new Set([...allColor, ...uniqueColor])];
-    });
 
-    let uniqueColors = [
-      ...new Map(allColor.map((color) => [color?.name, color])).values(),
-    ];
-    content = uniqueColors.map((item, i) => {
-      if (item) {
+    // HACK: WORK ON THIS
+    content = product_items.map((item, i) => {
+      item.variants.map((variant) => {
         return (
           <li key={i}>
             <div className="tp-shop-widget-checkbox-circle">
               <input
                 type="checkbox"
-                id={item.name}
+                id={variant.color}
                 checked={
                   router.query.color ===
-                  item.name.toLowerCase().replace("&", "").split(" ").join("-")
+                  variant.color
+                    .toLowerCase()
+                    .replace("&", "")
+                    .split(" ")
+                    .join("-")
                     ? "checked"
                     : false
                 }
                 readOnly
               />
-              <label onClick={() => handleColor(item.name)} htmlFor={item.name}>
-                {item.name}
+              <label
+                onClick={() => handleColor(variant.color)}
+                htmlFor={variant.color}
+              >
+                {variant.color}
               </label>
               <span
-                style={{ backgroundColor: `${item.clrCode}` }}
+                style={{ backgroundColor: `${item.code}` }}
                 className="tp-shop-widget-checkbox-circle-self"
               ></span>
             </div>
@@ -81,7 +81,7 @@ const ColorFilter = ({ setCurrPage, shop_right = false }) => {
             </span>
           </li>
         );
-      }
+      });
     });
   }
 

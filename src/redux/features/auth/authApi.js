@@ -10,19 +10,12 @@ export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/user/signup`,
+        url: `${url}/user/register`,
         method: "POST",
         body: data,
       }),
-    }),
-    // signUpProvider
-    signUpProvider: builder.mutation({
-      query: (token) => ({
-        url: `${url}/api/user/register/${token}`,
-        method: "POST",
-      }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
@@ -46,17 +39,50 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    // signUpProvider
+    // signUpProvider: builder.mutation({
+    //   query: (token) => ({
+    //     url: `${url}/api/user/register/${token}`,
+    //     method: "POST",
+    //   }),
+    //
+    //   async onQueryStarted(_, { queryFulfilled, dispatch }) {
+    //     try {
+    //       const result = await queryFulfilled;
+    //
+    //       Cookies.set(
+    //         "userInfo",
+    //         JSON.stringify({
+    //           accessToken: result.data.data.token,
+    //           user: result.data.data.user,
+    //         }),
+    //         { expires: 0.5 },
+    //       );
+    //
+    //       dispatch(
+    //         userLoggedIn({
+    //           accessToken: result.data.data.token,
+    //           user: result.data.data.user,
+    //         }),
+    //       );
+    //     } catch (err) {
+    //       // do nothing
+    //     }
+    //   },
+    // }),
     // login
     loginUser: builder.mutation({
-      query: (data) => ({
-        url: `${url}/api/user/login`,
+      query: (url, data) => ({
+        url: url,
         method: "POST",
         body: data,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+
+          console.log(result);
 
           Cookies.set(
             "userInfo",
@@ -82,7 +108,7 @@ export const authApi = apiSlice.injectEndpoints({
     getUser: builder.query({
       query: () => `${url}/api/user/me`,
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(
@@ -99,7 +125,7 @@ export const authApi = apiSlice.injectEndpoints({
     confirmEmail: builder.query({
       query: (token) => `${url}/api/user/confirmEmail/${token}`,
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
@@ -155,7 +181,7 @@ export const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 

@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 // internal
 import ErrorMsg from "@/components/common/error-msg";
-import { useGetShowCategoryQuery } from "@/redux/features/categoryApi";
+import { useGetActiveCategoryQuery } from "@/redux/features/categoryApi";
 import { handleFilterSidebarClose } from "@/redux/features/shop-filter-slice";
 import ShopCategoryLoader from "@/components/loader/shop/shop-category-loader";
 
 const CategoryFilter = ({ setCurrPage, shop_right = false }) => {
-  const { data: categories, isLoading, isError } = useGetShowCategoryQuery();
+  const { data: categories, isLoading, isError } = useGetActiveCategoryQuery();
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -33,24 +33,24 @@ const CategoryFilter = ({ setCurrPage, shop_right = false }) => {
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
   }
-  if (!isLoading && !isError && categories?.result?.length === 0) {
+  if (!isLoading && !isError && categories?.data?.length === 0) {
     content = <ErrorMsg msg="No Category found!" />;
   }
-  if (!isLoading && !isError && categories?.result?.length > 0) {
-    const category_items = categories.result;
+  if (!isLoading && !isError && categories?.data?.length > 0) {
+    const category_items = categories.data;
     content = category_items.map((item) => (
       <li key={item._id}>
         <a
-          onClick={() => handleCategoryRoute(item.parent)}
+          onClick={() => handleCategoryRoute(item.name)}
           style={{ cursor: "pointer" }}
           className={
             router.query.category ===
-            item.parent.toLowerCase().replace("&", "").split(" ").join("-")
+            item.name.toLowerCase().replace("&", "").split(" ").join("-")
               ? "active"
               : ""
           }
         >
-          {item.parent} <span>{item.products.length}</span>
+          {item.name} <span>{item.products?.length}</span>
         </a>
       </li>
     ));

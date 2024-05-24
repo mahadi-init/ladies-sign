@@ -9,10 +9,11 @@ import { CloseEye, OpenEye } from "@/svg";
 import ErrorMsg from "../common/error-msg";
 import { useLoginUserMutation } from "@/redux/features/auth/authApi";
 import { notifyError, notifySuccess } from "@/utils/toast";
+import { BACKEND_BASE_URL } from "@/consts/site-data";
 
 // schema
 const schema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
+  phone: Yup.string().required().label("phone"),
   password: Yup.string().required().min(6).label("Password"),
 });
 const LoginForm = () => {
@@ -31,10 +32,10 @@ const LoginForm = () => {
   });
   // onSubmit
   const onSubmit = (data) => {
-    loginUser({
-      email: data.email,
-      password: data.password,
-    }).then((data) => {
+    console.log(data);
+    const url = `${BACKEND_BASE_URL}/seller/login`;
+
+    loginUser(url, data).then((data) => {
       if (data?.data) {
         notifySuccess("Login successfully");
         router.push(redirect || "/");
@@ -50,17 +51,17 @@ const LoginForm = () => {
         <div className="tp-login-input-box">
           <div className="tp-login-input">
             <input
-              {...register("email", { required: `Email is required!` })}
-              name="email"
-              id="email"
-              type="email"
-              placeholder="xyz@gmail.com"
+              {...register("phone", { required: `Phone is required!` })}
+              name="phone"
+              id="phone"
+              type="tel"
+              placeholder="01712345678"
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="email">Your Email</label>
+            <label htmlFor="phone">Your Phone</label>
           </div>
-          <ErrorMsg msg={errors.email?.message} />
+          <ErrorMsg msg={errors.phone?.message} />
         </div>
         <div className="tp-login-input-box">
           <div className="p-relative">
@@ -86,12 +87,12 @@ const LoginForm = () => {
       </div>
       <div className="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
         <div className="tp-login-remeber">
-          <input id="remeber" type="checkbox" />
-          <label htmlFor="remeber">Remember me</label>
+          <input id="isSeller" type="checkbox" />
+          <label htmlFor="isSeller">Login as seller</label>
         </div>
-        <div className="tp-login-forgot">
-          <Link href="/forgot">Forgot Password?</Link>
-        </div>
+        {/* <div className="tp-login-forgot"> */}
+        {/*   <Link href="/forgot">Forgot Password?</Link> */}
+        {/* </div> */}
       </div>
       <div className="tp-login-bottom">
         <button type="submit" className="tp-login-btn w-100">
