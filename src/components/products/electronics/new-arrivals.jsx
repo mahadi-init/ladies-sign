@@ -75,7 +75,7 @@ const NewArrivals = () => {
   }
   return (
     <>
-      <section className="tp-product-arrival-area pb-55">
+      <section className="tp-product-arrival-area">
         <div className="container">
           <div className="row align-items-end">
             <div className="col-xl-5 col-sm-6">

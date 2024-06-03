@@ -7,16 +7,8 @@ import HeaderTwo from "@/layout/headers/header-2";
 import Footer from "@/layout/footers/footer";
 import CommonBreadcrumb from "@/components/breadcrumb/common-breadcrumb";
 import CheckoutArea from "@/components/checkout/checkout-area";
-import { useAuth } from "@clerk/nextjs";
-import { RedirectToSignIn } from "@clerk/nextjs";
 
 const CheckoutPage = () => {
-  const auth = useAuth();
-
-  if (!auth.sessionId) {
-    return <RedirectToSignIn />;
-  }
-
   return (
     <Wrapper>
       <SEO pageTitle="Checkout" />

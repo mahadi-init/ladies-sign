@@ -1,4 +1,3 @@
-import { useState } from "react";
 import InputRange from "@/ui/input-range";
 
 const PriceFilter = ({ priceFilterValues, maxPrice }) => {

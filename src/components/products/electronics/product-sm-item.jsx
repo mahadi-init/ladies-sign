@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
 const ProductSmItem = ({ product }) => {
-  const { _id, img, category, title, price, reviews } = product || {};
+  const { _id, img, category, name, price, reviews } = product || {};
   const [ratingVal, setRatingVal] = useState(0);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const ProductSmItem = ({ product }) => {
           <a href="#">{category?.name}</a>
         </div>
         <h3 className="tp-product-title">
-          <Link href={`/product-details/${_id}`}>{title}</Link>
+          <Link href={`/product-details/${_id}`}>{name}</Link>
         </h3>
         <div className="tp-product-rating d-sm-flex align-items-center">
           <div className="tp-product-rating-icon">

@@ -3,7 +3,6 @@ import ErrorMsg from "@/components/common/error-msg";
 import SearchPrdLoader from "@/components/loader/search-prd-loader";
 import ProductItem from "@/components/products/fashion/product-item";
 import SEO from "@/components/seo";
-import ShopTopLeft from "@/components/shop/shop-top-left";
 import Footer from "@/layout/footers/footer";
 import HeaderTwo from "@/layout/headers/header-2";
 import Wrapper from "@/layout/wrapper";
@@ -47,11 +46,14 @@ export default function SearchPage({ query }) {
     let all_products = products.data;
     let product_items = all_products;
 
+    console.log(product_items);
+
     if (searchText && !productType) {
       product_items = all_products.filter((prd) =>
-        prd.title?.toLowerCase().includes(searchText?.toLowerCase()),
+        prd.name?.toLowerCase().includes(searchText?.toLowerCase()),
       );
     }
+
     if (searchText && productType) {
       product_items = all_products
         .filter(
@@ -59,21 +61,24 @@ export default function SearchPage({ query }) {
             prd.productType?.toLowerCase() === productType?.toLowerCase(),
         )
         .filter((p) =>
-          p?.title?.toLowerCase().includes(searchText?.toLowerCase()),
+          p?.name?.toLowerCase().includes(searchText?.toLowerCase()),
         );
     }
+
     // Price low to high
     if (shortValue === "Price low to high") {
       product_items = product_items
         .slice()
         .sort((a, b) => Number(a.price) - Number(b.price));
     }
+
     // Price high to low
     if (shortValue === "Price high to low") {
       product_items = product_items
         .slice()
         .sort((a, b) => Number(b.price) - Number(a.price));
     }
+
     if (product_items.length === 0) {
       content = (
         <div className="text-center pt-80 pb-80">

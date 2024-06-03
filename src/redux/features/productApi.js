@@ -7,7 +7,7 @@ export const productApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => `${url}/product/all`,
+      query: () => `${BACKEND_BASE_URL}/product/all`,
       providesTags: ["Products"],
     }),
     getProductType: builder.query({
@@ -15,29 +15,27 @@ export const productApi = apiSlice.injectEndpoints({
       providesTags: ["ProductType"],
     }),
     getOfferProducts: builder.query({
-      query: (type) => `${url}/product/offer?type=${type}`,
+      query: () => `${BACKEND_BASE_URL}/product/offer`,
       providesTags: ["OfferProducts"],
     }),
     getPopularProductByType: builder.query({
-      query: (type) => `${url}/product/popular/${type}`,
+      query: (type) => `${BACKEND_BASE_URL}/product/popular/${type}`,
       providesTags: ["PopularProducts"],
     }),
     getTopRatedProducts: builder.query({
-      query: () => `${url}/product/top-rated`,
+      query: () => `${BACKEND_BASE_URL}/product/top-rated`,
       providesTags: ["TopRatedProducts"],
     }),
-    // get single product
     getProduct: builder.query({
-      query: (id) => `${url}/product/get/${id}`,
-      providesTags: (result, error, arg) => [{ type: "Product", id: arg }],
-      invalidatesTags: (result, error, arg) => [
+      query: (id) => `${BACKEND_BASE_URL}/product/get/${id}`,
+      providesTags: (_result, _error, arg) => [{ type: "Product", id: arg }],
+      invalidatesTags: (_result, _error, arg) => [
         { type: "RelatedProducts", id: arg },
       ],
     }),
-    // get related products
     getRelatedProducts: builder.query({
-      query: (id) => `${url}/product/related/${id}`,
-      providesTags: (result, error, arg) => [
+      query: (id) => `${BACKEND_BASE_URL}/product/related/${id}`,
+      providesTags: (_result, _error, arg) => [
         { type: "RelatedProducts", id: arg },
       ],
     }),

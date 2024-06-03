@@ -5,7 +5,7 @@ import { useGetActiveCategoryQuery } from "@/redux/features/categoryApi";
 import ErrorMsg from "../common/error-msg";
 import HomeCateLoader from "../loader/home/home-cate-loader";
 
-const ElectronicCategory = () => {
+const CategoryView = () => {
   const { data: categories, isLoading, isError } = useGetActiveCategoryQuery();
   const router = useRouter();
 
@@ -74,4 +74,4 @@ const ElectronicCategory = () => {
   );
 };
 
-export default ElectronicCategory;
+export default CategoryView;

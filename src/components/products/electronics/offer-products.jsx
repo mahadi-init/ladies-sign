@@ -37,13 +37,8 @@ const sliderSetting = {
 };
 
 const OfferProducts = () => {
-  const {
-    data: products,
-    isError,
-    isLoading,
-  } = useGetOfferProductsQuery("electronics");
-  // decide what to render
-  console.log(products);
+  const { data: products, isError, isLoading } = useGetOfferProductsQuery();
+
   let content = null;
   if (isLoading) {
     content = <HomeOfferPrdLoader loading={isLoading} />;
@@ -75,7 +70,7 @@ const OfferProducts = () => {
 
   return (
     <>
-      <section className="tp-product-offer grey-bg-2 pt-70 pb-80">
+      <section className="tp-product-offer grey-bg-2 pt-80 pb-80">
         <div className="container">
           <div className="row align-items-end">
             <div className="col-xl-4 col-md-5 col-sm-6">

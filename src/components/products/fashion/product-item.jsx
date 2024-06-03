@@ -11,7 +11,7 @@ import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { add_to_compare } from "@/redux/features/compareSlice";
 
 const ProductItem = ({ product, style_2 = false }) => {
-  const { _id, img, category, title, reviews, price, discount, tags, status } =
+  const { _id, img, category, name, reviews, price, discount, tags, status } =
     product || {};
   const [ratingVal, setRatingVal] = useState(0);
   const { cart_products } = useSelector((state) => state.cart);
@@ -130,7 +130,7 @@ const ProductItem = ({ product, style_2 = false }) => {
           ))}
         </div>
         <h3 className="tp-product-title-2">
-          <Link href={`/product-details/${_id}`}>{title}</Link>
+          <Link href={`/product-details/${_id}`}>{name}</Link>
         </h3>
         <div className="tp-product-rating-icon tp-product-rating-icon-2">
           <Rating
@@ -144,7 +144,7 @@ const ProductItem = ({ product, style_2 = false }) => {
           {discount > 0 ? (
             <>
               <span className="tp-product-price-2 new-price">
-              ৳{price.toFixed(2)}{" "}
+                ৳{price.toFixed(2)}{" "}
               </span>
               <span className="tp-product-price-2 old-price">
                 {" "}

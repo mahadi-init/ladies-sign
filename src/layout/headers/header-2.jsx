@@ -4,20 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 // internal
 import Menus from "./header-com/menus";
-import logo from "@assets/img/logo/logo.svg";
 import useSticky from "@/hooks/use-sticky";
 import useCartInfo from "@/hooks/use-cart-info";
 import { openCartMini } from "@/redux/features/cartSlice";
 import CartMiniSidebar from "@/components/common/cart-mini-sidebar";
-import {
-  CartTwo,
-  Compare,
-  Facebook,
-  Menu,
-  PhoneTwo,
-  Wishlist,
-  Search,
-} from "@/svg";
+import { CartTwo, Compare, Menu, Wishlist, Search } from "@/svg";
 import useSearchFormSubmit from "@/hooks/use-search-form-submit";
 import OffCanvas from "@/components/common/off-canvas";
 
