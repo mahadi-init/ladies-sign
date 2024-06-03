@@ -8,16 +8,16 @@ export const categoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     addCategory: builder.mutation({
       query: (data) => ({
-        url: `${url}/category/add`,
+        url: `${BACKEND_BASE_URL}/category/add`,
         method: "POST",
         body: data,
       }),
     }),
     getActiveCategory: builder.query({
-      query: () => `${url}/category/active`,
+      query: () => `${BACKEND_BASE_URL}/category/active`,
     }),
     getProductTypeCategory: builder.query({
-      query: (type) => `${url}/category/active/${type}`,
+      query: (type) => `${BACKEND_BASE_URL}/category/active/type?type=${type}`,
     }),
   }),
 });

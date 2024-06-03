@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { notifyError, notifySuccess } from "@/utils/toast";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
 // internal
+import {
+  useLoginSellerMutation,
+  useLoginUserMutation,
+} from "@/redux/features/auth/authApi";
 import { CloseEye, OpenEye } from "@/svg";
 import ErrorMsg from "../common/error-msg";
-import { useLoginUserMutation } from "@/redux/features/auth/authApi";
-import { notifyError, notifySuccess } from "@/utils/toast";
-import { BACKEND_BASE_URL } from "@/consts/site-data";
 
 // schema
 const schema = Yup.object().shape({
   phone: Yup.string().required().label("phone"),
   password: Yup.string().required().min(6).label("Password"),
+  isSeller: Yup.boolean().default(false).label("isSeller"),
 });
 const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
   const [loginUser, {}] = useLoginUserMutation();
+  const [loginSeller, {}] = useLoginSellerMutation();
   const router = useRouter();
   const { redirect } = router.query;
+
   // react hook form
   const {
     register,
@@ -31,19 +35,22 @@ const LoginForm = () => {
     resolver: yupResolver(schema),
   });
   // onSubmit
-  const onSubmit = (data) => {
-    console.log(data);
-    const url = `${BACKEND_BASE_URL}/seller/login`;
+  const onSubmit = async (data) => {
+    const isSeller = data.isSeller;
+    let res;
 
-    loginUser(url, data).then((data) => {
-      if (data?.data) {
-        notifySuccess("Login successfully");
-        router.push(redirect || "/");
-      } else {
-        notifyError(data?.error?.data?.error);
-      }
-    });
-    reset();
+    if (isSeller) {
+      res = await loginSeller(data);
+    } else {
+      res = await loginUser(data);
+    }
+
+    if (res.data.success) {
+      notifySuccess("Login successfully");
+      router.push(redirect || "/");
+    } else {
+      notifyError("Account not found");
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +94,7 @@ const LoginForm = () => {
       </div>
       <div className="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
         <div className="tp-login-remeber">
-          <input id="isSeller" type="checkbox" />
+          <input id="isSeller" type="checkbox" {...register("isSeller")} />
           <label htmlFor="isSeller">Login as seller</label>
         </div>
         {/* <div className="tp-login-forgot"> */}

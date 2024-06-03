@@ -1,12 +1,12 @@
-import Cookies from "js-cookie";
+import { BACKEND_BASE_URL, GUEST_BEARER_TOKEN } from "@/consts/site-data";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const NEXT_PUBLIC_API_BASE_URL = "https://project-warehouse-backend.vercel.app";
+import Cookies from "js-cookie";
 
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: NEXT_PUBLIC_API_BASE_URL,
-    prepareHeaders: async (headers, { getState, endpoint }) => {
+    baseUrl: BACKEND_BASE_URL,
+    prepareHeaders: async (headers) => {
       try {
         const userInfo = Cookies.get("userInfo");
         if (userInfo) {
@@ -14,6 +14,8 @@ export const apiSlice = createApi({
           if (user?.accessToken) {
             headers.set("Authorization", `Bearer ${user.accessToken}`);
           }
+        } else {
+          headers.set("Authorization", `Bearer ${GUEST_BEARER_TOKEN}`);
         }
       } catch (error) {
         console.error("Error parsing user info:", error);
@@ -33,5 +35,6 @@ export const apiSlice = createApi({
     "OfferProducts",
     "PopularProducts",
     "TopRatedProducts",
+    "Reviews",
   ],
 });

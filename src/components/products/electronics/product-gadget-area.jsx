@@ -105,36 +105,8 @@ const ProductGadgetArea = () => {
       <section className="tp-product-gadget-area pb-75">
         <div className="container">
           <div className="row">
-            <div className="col-xl-4 col-lg-5">
-              <div className="tp-product-gadget-sidebar mb-40">
-                <div className="tp-product-gadget-categories p-relative fix mb-10">
-                  <div className="tp-product-gadget-thumb">
-                    <Image src={gadget_girl} alt="gadget_girl img" priority />
-                  </div>
-                  <h3 className="tp-product-gadget-categories-title">
-                    Electronics <br /> Gadgets
-                  </h3>
-
-                  <div className="tp-product-gadget-categories-list">
-                    <PrdCategoryList />
-                  </div>
-
-                  <div className="tp-product-gadget-btn">
-                    <Link href="/shop" className="tp-link-btn">
-                      More Products
-                      <ArrowRight />
-                    </Link>
-                  </div>
-                </div>
-                <div className="tp-product-gadget-banner">
-                  <GadgetBanner />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-8 col-lg-7">
-              <div className="tp-product-gadget-wrapper">
-                <div className="row">{content}</div>
-              </div>
+            <div className="tp-product-gadget-wrapper">
+              <div className="row">{content}</div>
             </div>
           </div>
         </div>

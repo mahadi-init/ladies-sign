@@ -1,7 +1,7 @@
-import { apiSlice } from "@/redux/api/apiSlice";
-import { userLoggedIn } from "./authSlice";
-import Cookies from "js-cookie";
 import { BACKEND_BASE_URL } from "@/consts/site-data";
+import { apiSlice } from "@/redux/api/apiSlice";
+import Cookies from "js-cookie";
+import { userLoggedIn } from "./authSlice";
 
 const url = BACKEND_BASE_URL;
 
@@ -72,31 +72,35 @@ export const authApi = apiSlice.injectEndpoints({
     // }),
     // login
     loginUser: builder.mutation({
-      query: (url, data) => ({
-        url: url,
+      query: (data) => ({
+        url: `${BACKEND_BASE_URL}/user/login`,
         method: "POST",
         body: data,
       }),
 
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
-          const result = await queryFulfilled;
+          const res = await queryFulfilled;
+          const data = res.data;
 
-          console.log(result);
+          if (!data.success) {
+            throw new Error();
+          }
 
           Cookies.set(
             "userInfo",
             JSON.stringify({
-              accessToken: result.data.data.token,
-              user: result.data.data.user,
+              user: data.data,
+              accessToken: data.token,
             }),
             { expires: 0.5 },
           );
 
           dispatch(
             userLoggedIn({
-              accessToken: result.data.data.token,
-              user: result.data.data.user,
+              user: data.data,
+              accessToken: data.token,
+              role: "user",
             }),
           );
         } catch (err) {
@@ -104,9 +108,49 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    loginSeller: builder.mutation({
+      query: (data) => ({
+        url: `${BACKEND_BASE_URL}/seller/login`,
+        method: "POST",
+        body: data,
+      }),
+
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
+        try {
+          const res = await queryFulfilled;
+          const data = res.data;
+          console.log(data);
+
+          if (!data.success) {
+            throw new Error();
+          }
+
+          Cookies.set(
+            "userInfo",
+            JSON.stringify({
+              user: data.data,
+              accessToken: data.token,
+            }),
+            { expires: 0.5 },
+          );
+
+          dispatch(
+            userLoggedIn({
+              user: data.data,
+              accessToken: data.token,
+              role: "seller",
+            }),
+          );
+
+          // return data;
+        } catch (err) {
+          // do nothing
+        }
+      },
+    }),
     // get me
     getUser: builder.query({
-      query: () => `${url}/api/user/me`,
+      query: () => `${BACKEND_BASE_URL}/me`,
 
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
@@ -210,6 +254,7 @@ export const authApi = apiSlice.injectEndpoints({
 
 export const {
   useLoginUserMutation,
+  useLoginSellerMutation,
   useRegisterUserMutation,
   useConfirmEmailQuery,
   useResetPasswordMutation,

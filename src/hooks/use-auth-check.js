@@ -1,7 +1,7 @@
+import { userLoggedIn } from "@/redux/features/auth/authSlice";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
-import { userLoggedIn } from "@/redux/features/auth/authSlice";
 
 export default function useAuthCheck() {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ export default function useAuthCheck() {
 
     if (localAuth) {
       const auth = JSON.parse(localAuth);
+
       if (auth?.accessToken && auth?.user) {
         dispatch(
           userLoggedIn({
@@ -21,6 +22,7 @@ export default function useAuthCheck() {
         );
       }
     }
+
     setAuthChecked(true);
   }, [dispatch, setAuthChecked]);
 

@@ -78,7 +78,10 @@ const HeaderTwo = ({ style_2 = false }) => {
                   </div>
                   <div className="col-xl-5 d-none d-xl-block">
                     <div className="main-menu menu-style-2">
-                      <nav className="tp-main-menu-content">
+                      <nav
+                        style={{ marginLeft: "20px" }}
+                        className=" tp-main-menu-content"
+                      >
                         <Menus />
                       </nav>
                     </div>

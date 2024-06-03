@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import { useRouter } from "next/router";
 // internal
-import { CloseEye, OpenEye } from "@/svg";
+import { useSendMessageMutation } from "@/redux/features/contactApi";
+import { notifySuccess } from "@/utils/toast";
 import ErrorMsg from "../common/error-msg";
-import { notifyError, notifySuccess } from "@/utils/toast";
 
 // schema
 const schema = Yup.object().shape({
@@ -20,6 +18,7 @@ const schema = Yup.object().shape({
 });
 
 const ContactForm = () => {
+  const [sendMessage, {}] = useSendMessageMutation();
   // react hook form
   const {
     register,
@@ -29,13 +28,24 @@ const ContactForm = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   // on submit
   const onSubmit = (data) => {
     if (data) {
-      notifySuccess("Message sent successfully!");
+      sendMessage({
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+      }).then((result) => {
+        if (result?.error) {
+          notifyError("Register Failed");
+        } else {
+          notifySuccess("Message send");
+          reset();
+        }
+      });
     }
-
-    reset();
   };
 
   return (

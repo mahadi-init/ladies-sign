@@ -1,9 +1,32 @@
 import React from "react";
-import { feature_data } from "./feature-area-2";
+import { Delivery, Discount, Refund, Support } from "@/svg";
+
+export const feature_data = [
+  {
+    icon: <Delivery />,
+    title: "Low Cost Delivery",
+    subtitle: "Orders from all item",
+  },
+  {
+    icon: <Refund />,
+    title: "Return & Refund",
+    subtitle: "Money back guarantee",
+  },
+  {
+    icon: <Discount />,
+    title: "Seller Discount",
+    subtitle: "Discount price for sellers",
+  },
+  {
+    icon: <Support />,
+    title: "Support 24/7",
+    subtitle: "Contact us 24 hours a day",
+  },
+];
 
 const FeatureArea = () => {
   return (
-    <section className="tp-feature-area tp-feature-border-radius pb-70">
+    <section className="tp-feature-area tp-feature-border-radius">
       <div className="container">
         <div className="row gx-1 gy-1 gy-xl-0">
           {feature_data.map((item, i) => (

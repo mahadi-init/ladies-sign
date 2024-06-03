@@ -1,9 +1,16 @@
-import React, { useRef, useEffect } from "react";
+import { useGetReviewByIdQuery } from "@/redux/features/reviewApi";
+import { useEffect, useRef } from "react";
 import ReviewForm from "../forms/review-form";
 import ReviewItem from "./review-item";
 
 const DetailsTabNav = ({ product }) => {
-  const { cid, description, additionalInformation, reviews } = product || {};
+  const { _id, description, additionalInformation } = product || {};
+  const {
+    data: reviews,
+    isLoading,
+    isError,
+  } = useGetReviewByIdQuery(product._id);
+
   const activeRef = useRef(null);
   const marker = useRef(null);
   // handleActive
@@ -56,7 +63,7 @@ const DetailsTabNav = ({ product }) => {
               title="Description"
             />
             <NavItem id="additional" title="Additional information" />
-            <NavItem id="review" title={`Reviews (${reviews.length})`} />
+            <NavItem id="review" title={`Reviews (${reviews?.data?.length})`} />
 
             <span
               ref={marker}
@@ -128,20 +135,24 @@ const DetailsTabNav = ({ product }) => {
                 <div className="col-lg-6">
                   <div className="tp-product-details-review-statics">
                     {/* reviews */}
-                    <div className="tp-product-details-review-list pr-110">
-                      <h3 className="tp-product-details-review-title">
-                        Rating & Review
-                      </h3>
-                      {reviews.length === 0 && (
+                    {!isLoading ? (
+                      <div className="tp-product-details-review-list pr-110">
                         <h3 className="tp-product-details-review-title">
-                          There are no reviews yet.
+                          Rating & Review
                         </h3>
-                      )}
-                      {reviews.length > 0 &&
-                        reviews.map((item) => (
-                          <ReviewItem key={item._id} review={item} />
-                        ))}
-                    </div>
+                        {reviews?.data?.length === 0 && (
+                          <h3 className="tp-product-details-review-title">
+                            There are no reviews yet.
+                          </h3>
+                        )}
+                        {reviews?.data?.length > 0 &&
+                          reviews?.data?.map((item) => (
+                            <ReviewItem key={item._id} review={item} />
+                          ))}
+                      </div>
+                    ) : (
+                      <p>Loading..</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-6">
@@ -154,7 +165,7 @@ const DetailsTabNav = ({ product }) => {
                       are marked *
                     </p>
                     {/* form start */}
-                    <ReviewForm product_id={cid} />
+                    <ReviewForm product_id={_id} />
                     {/* form end */}
                   </div>
                 </div>

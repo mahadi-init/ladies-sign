@@ -47,13 +47,13 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     // getUserOrders
     getUserOrders: builder.query({
-      query: () => `${url}/api/user-order`,
+      query: (id) => `${BACKEND_BASE_URL}/order/by-person-id/${id}`,
       providesTags: ["UserOrders"],
       keepUnusedDataFor: 600,
     }),
     // getUserOrders
     getUserOrderById: builder.query({
-      query: (id) => `${url}/api/user-order/${id}`,
+      query: (id) => `${BACKEND_BASE_URL}/order/get/${id}`,
       providesTags: (result, error, arg) => [{ type: "UserOrder", id: arg }],
       keepUnusedDataFor: 600,
     }),

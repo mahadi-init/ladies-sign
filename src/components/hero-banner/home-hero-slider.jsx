@@ -18,7 +18,6 @@ import { ArrowRightLong, SliderNextBtn, SliderPrevBtn, TextShape } from "@/svg";
 const sliderData = [
   {
     id: 1,
-    pre_title: { text: "Starting at", price: 274 },
     title: "The best tablet Collection 2023",
     subtitle: {
       text_1: "Exclusive offer ",
@@ -30,7 +29,6 @@ const sliderData = [
   },
   {
     id: 2,
-    pre_title: { text: "Starting at", price: 999 },
     title: "The best note book collection 2023",
     subtitle: {
       text_1: "Exclusive offer ",
@@ -42,7 +40,6 @@ const sliderData = [
   },
   {
     id: 3,
-    pre_title: { text: "Starting at", price: 999 },
     title: "The best note book collection 2023",
     subtitle: {
       text_1: "Exclusive offer ",
@@ -117,9 +114,6 @@ const HomeHeroSlider = () => {
                 <div className="row align-items-center">
                   <div className="col-xl-5 col-lg-6 col-md-6">
                     <div className="tp-slider-content p-relative z-index-1">
-                      <span>
-                        {item.pre_title.text} <b>৳{item.pre_title.text}</b>
-                      </span>
                       <h3 className="tp-slider-title">{item.title}</h3>
                       <p>
                         {item.subtitle.text_1}

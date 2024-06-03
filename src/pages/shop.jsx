@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import SEO from "@/components/seo";
-import Wrapper from "@/layout/wrapper";
-import HeaderTwo from "@/layout/headers/header-2";
 import ShopBreadcrumb from "@/components/breadcrumb/shop-breadcrumb";
-import ShopArea from "@/components/shop/shop-area";
-import { useGetAllProductsQuery } from "@/redux/features/productApi";
 import ErrorMsg from "@/components/common/error-msg";
-import Footer from "@/layout/footers/footer";
 import ShopFilterOffCanvas from "@/components/common/shop-filter-offcanvas";
 import ShopLoader from "@/components/loader/shop/shop-loader";
+import SEO from "@/components/seo";
+import ShopArea from "@/components/shop/shop-area";
+import Footer from "@/layout/footers/footer";
+import HeaderTwo from "@/layout/headers/header-2";
+import Wrapper from "@/layout/wrapper";
+import { useGetAllProductsQuery } from "@/redux/features/productApi";
+import { useEffect, useState } from "react";
 
 const ShopPage = ({ query }) => {
   const { data: products, isError, isLoading } = useGetAllProductsQuery();
@@ -97,7 +97,7 @@ const ShopPage = ({ query }) => {
       if (query.status === "on-sale") {
         product_items = product_items.filter((p) => p.discount > 0);
       } else if (query.status === "in-stock") {
-        product_items = product_items.filter((p) => p.status === "in-stock");
+        product_items = product_items.filter((p) => p.status === "IN-STOCK");
       }
     }
 
@@ -105,28 +105,37 @@ const ShopPage = ({ query }) => {
     if (query.category) {
       product_items = product_items.filter(
         (p) =>
-          p.name.toLowerCase().replace("&", "").split(" ").join("-") ===
-          query.category,
+          p.category.name
+            .toLowerCase()
+            .replace("&", "")
+            .split(" ")
+            .join("-") === query.category,
       );
     }
 
     // category filter
     if (query.subCategory) {
-      product_items = product_items.filter(
-        (p) =>
-          p.children.toLowerCase().replace("&", "").split(" ").join("-") ===
-          query.subCategory,
-      );
+      let products = [];
+
+      product_items = product_items.map((p) => {
+        p.children.map((child) => {
+          if (child === query.subCategory) {
+            products.push(p);
+          }
+        });
+      });
+
+      product_items = products;
     }
 
     // color filter
     if (query.color) {
       product_items = product_items.filter((product) => {
-        for (let i = 0; i < product.imageURLs.length; i++) {
-          const color = product.imageURLs[i]?.color;
+        for (let i = 0; i < product.variants.length; i++) {
+          const color = product.variants[i]?.color;
           if (
             color &&
-            color?.name.toLowerCase().replace("&", "").split(" ").join("-") ===
+            color?.toLowerCase().replace("&", "").split(" ").join("-") ===
               query.color
           ) {
             return true; // match found, include product in result

@@ -1,11 +1,10 @@
-import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 // internal
 import ErrorMsg from "@/components/common/error-msg";
+import ShopColorLoader from "@/components/loader/shop/color-filter-loader";
 import { useGetAllProductsQuery } from "@/redux/features/productApi";
 import { handleFilterSidebarClose } from "@/redux/features/shop-filter-slice";
-import ShopColorLoader from "@/components/loader/shop/color-filter-loader";
 
 const ColorFilter = ({ setCurrPage, shop_right = false }) => {
   const { data: products, isError, isLoading } = useGetAllProductsQuery();
@@ -40,8 +39,8 @@ const ColorFilter = ({ setCurrPage, shop_right = false }) => {
     const product_items = products.data;
 
     // HACK: WORK ON THIS
-    content = product_items.map((item, i) => {
-      item.variants.map((variant) => {
+    content = products.data.map((item, i) => {
+      return item.variants.map((variant) => {
         return (
           <li key={i}>
             <div className="tp-shop-widget-checkbox-circle">
@@ -67,18 +66,10 @@ const ColorFilter = ({ setCurrPage, shop_right = false }) => {
                 {variant.color}
               </label>
               <span
-                style={{ backgroundColor: `${item.code}` }}
+                style={{ backgroundColor: `${variant.color}` }}
                 className="tp-shop-widget-checkbox-circle-self"
               ></span>
             </div>
-            <span className="tp-shop-widget-checkbox-circle-number">
-              {
-                product_items
-                  .map((p) => p.imageURLs)
-                  .flat()
-                  .filter((i) => i?.color?.name === item?.name).length
-              }
-            </span>
           </li>
         );
       });

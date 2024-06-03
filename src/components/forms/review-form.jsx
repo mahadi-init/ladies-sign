@@ -1,18 +1,16 @@
-import React, { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
 import * as Yup from "yup";
 // internal
-import ErrorMsg from "../common/error-msg";
 import { useAddReviewMutation } from "@/redux/features/reviewApi";
 import { notifyError, notifySuccess } from "@/utils/toast";
+import ErrorMsg from "../common/error-msg";
 
 // schema
 const schema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
-  email: Yup.string().required().email().label("Email"),
   comment: Yup.string().required().label("Comment"),
 });
 
@@ -36,23 +34,25 @@ const ReviewForm = ({ product_id }) => {
     resolver: yupResolver(schema),
   });
   // on submit
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (!user) {
       notifyError("Please login first");
       return;
     } else {
-      addReview({
-        userId: user?._id,
+      const res = await addReview({
+        name: user?.name,
         productId: product_id,
         rating: rating,
         comment: data.comment,
-      }).then((result) => {
-        if (result?.error) {
-          notifyError(result?.error?.data?.message);
-        } else {
-          notifySuccess(result?.data?.message);
-        }
       });
+
+      const { success } = res.data;
+
+      if (success) {
+        notifySuccess("Review added");
+      } else {
+        notifyError(res?.error?.data?.message);
+      }
     }
     reset();
   };
@@ -83,37 +83,7 @@ const ReviewForm = ({ product_id }) => {
           <div className="tp-product-details-review-input-title">
             <label htmlFor="msg">Your Review</label>
           </div>
-          <ErrorMsg msg={errors.name?.comment} />
-        </div>
-        <div className="tp-product-details-review-input-box">
-          <div className="tp-product-details-review-input">
-            <input
-              {...register("name", { required: `Name is required!` })}
-              name="name"
-              id="name"
-              type="text"
-              placeholder="Shahnewaz Sakil"
-            />
-          </div>
-          <div className="tp-product-details-review-input-title">
-            <label htmlFor="name">Your Name</label>
-          </div>
-          <ErrorMsg msg={errors.name?.name} />
-        </div>
-        <div className="tp-product-details-review-input-box">
-          <div className="tp-product-details-review-input">
-            <input
-              {...register("email", { required: `Name is required!` })}
-              name="email"
-              id="email"
-              type="email"
-              placeholder="xyz@gmail.com"
-            />
-          </div>
-          <div className="tp-product-details-review-input-title">
-            <label htmlFor="email">Your Email</label>
-          </div>
-          <ErrorMsg msg={errors.name?.email} />
+          <ErrorMsg msg={errors.comment?.message} />
         </div>
       </div>
       <div className="tp-product-details-review-btn-wrapper">

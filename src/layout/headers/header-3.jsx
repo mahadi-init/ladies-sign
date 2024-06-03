@@ -34,10 +34,15 @@ const HeaderThree = () => {
               <div className="row align-items-center">
                 <div className="col-xl-2 col-lg-2 col-6">
                   <div className="logo">
-                    <Link href="/">
+                    <Link
+                      href="/"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
                       <Image
-                        className="logo-light"
-                        src={"/public/assets/img/logo/logo.png"}
+                        src={"/assets/img/logo/logo.png"}
                         alt="logo"
                         width={500}
                         height={500}
@@ -45,10 +50,12 @@ const HeaderThree = () => {
                       />
                       <p
                         style={{
-                          fontFamily: "sans-serif",
+                          marginLeft: "10px",
+                          marginTop: "12px",
                           fontWeight: "bold",
                           fontSize: "1.2rem",
-                          color: "black",
+                          color: "white",
+                          fontFamily: "sans-serif",
                         }}
                       >
                         Ladies Sign

@@ -1,10 +1,9 @@
-import React from "react";
 import Image from "next/image";
 // internal
-import ContactForm from "../forms/contact-form";
 import contact_icon_1 from "@assets/img/contact/contact-icon-1.png";
 import contact_icon_2 from "@assets/img/contact/contact-icon-2.png";
 import contact_icon_3 from "@assets/img/contact/contact-icon-3.png";
+import ContactForm from "../forms/contact-form";
 
 const ContactArea = () => {
   return (
@@ -40,7 +39,7 @@ const ContactArea = () => {
                         </a>
                       </p>
                       <p data-info="phone">
-                        <a href="tel:670-413-90-762">+670 413 90 762</a>
+                        <a href="tel:+8801637009327">+8801637009327</a>
                       </p>
                     </div>
                   </div>

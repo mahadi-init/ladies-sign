@@ -14,6 +14,8 @@ const FashionCategory = () => {
   } = useGetProductTypeCategoryQuery("fashion");
   const router = useRouter();
 
+  console.log(categories);
+
   // handle category route
   const handleCategoryRoute = (title) => {
     router.push(
@@ -33,11 +35,11 @@ const FashionCategory = () => {
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
   }
-  if (!isLoading && !isError && categories?.result?.length === 0) {
+  if (!isLoading && !isError && categories?.data?.length === 0) {
     content = <ErrorMsg msg="No Category found!" />;
   }
-  if (!isLoading && !isError && categories?.result?.length > 0) {
-    const category_items = categories.result;
+  if (!isLoading && !isError && categories?.data?.length > 0) {
+    const category_items = categories.data;
     content = category_items.map((item) => (
       <div key={item._id} className="col-xxl-4 col-lg-6">
         <div className="tp-banner-item-2 p-relative z-index-1 grey-bg-2 mb-20 fix">
@@ -48,14 +50,14 @@ const FashionCategory = () => {
           <h3 className="tp-banner-title-2">
             <a
               className="cursor-pointer"
-              onClick={() => handleCategoryRoute(item.parent)}
+              onClick={() => handleCategoryRoute(item.name)}
             >
               {item.parent}
             </a>
           </h3>
           <div className="tp-banner-btn-2">
             <a
-              onClick={() => handleCategoryRoute(item.parent)}
+              onClick={() => handleCategoryRoute(item.name)}
               className="cursor-pointer tp-btn tp-btn-border tp-btn-border-sm"
             >
               Shop Now <ArrowRightLong />
