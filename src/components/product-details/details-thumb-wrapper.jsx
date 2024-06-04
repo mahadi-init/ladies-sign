@@ -37,23 +37,25 @@ const DetailsThumbWrapper = ({
               </button>
             ))}
 
-            <button
-              onClick={() => setIsVideoOpen(true)}
-              style={{
-                background: "purple",
-                width: "78px",
-                height: "100px",
-                padding: "16px",
-                borderRadius: "12px",
-              }}
-            >
-              <a
-                className="cursor-pointer popup-video"
-                style={{ color: "white" }}
+            {videoId && (
+              <button
+                onClick={() => setIsVideoOpen(true)}
+                style={{
+                  background: "purple",
+                  width: "78px",
+                  height: "100px",
+                  padding: "16px",
+                  borderRadius: "12px",
+                }}
               >
-                <i className="fas fa-play" color="white"></i>
-              </a>
-            </button>
+                <a
+                  className="cursor-pointer popup-video"
+                  style={{ color: "white" }}
+                >
+                  <i className="fas fa-play" color="white"></i>
+                </a>
+              </button>
+            )}
           </div>
         </nav>
         <div className="tab-content m-img">

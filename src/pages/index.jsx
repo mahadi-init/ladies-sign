@@ -21,7 +21,7 @@ export default function Home() {
       <Header />
       <HomeHeroSlider />
       <FeatureArea />
-      <CategoryView />
+      {/* <CategoryView /> */}
       <BannerArea />
       <ProductArea />
       <ProductBanner />
