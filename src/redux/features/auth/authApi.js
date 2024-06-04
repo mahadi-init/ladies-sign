@@ -3,14 +3,12 @@ import { apiSlice } from "@/redux/api/apiSlice";
 import Cookies from "js-cookie";
 import { userLoggedIn } from "./authSlice";
 
-const url = BACKEND_BASE_URL;
-
 export const authApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (data) => ({
-        url: `${url}/user/register`,
+        url: `${BACKEND_BASE_URL}/user/register`,
         method: "POST",
         body: data,
       }),
@@ -167,7 +165,7 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     // confirmEmail
     confirmEmail: builder.query({
-      query: (token) => `${url}/api/user/confirmEmail/${token}`,
+      query: (token) => `${BACKEND_BASE_URL}/api/user/confirmEmail/${token}`,
 
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
@@ -196,7 +194,7 @@ export const authApi = apiSlice.injectEndpoints({
     // reset password
     resetPassword: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/user/forget-password`,
+        url: `${BACKEND_BASE_URL}/api/user/forget-password`,
         method: "PATCH",
         body: data,
       }),
@@ -204,7 +202,7 @@ export const authApi = apiSlice.injectEndpoints({
     // confirmForgotPassword
     confirmForgotPassword: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/user/confirm-forget-password`,
+        url: `${BACKEND_BASE_URL}/api/user/confirm-forget-password`,
         method: "PATCH",
         body: data,
       }),
@@ -212,7 +210,7 @@ export const authApi = apiSlice.injectEndpoints({
     // change password
     changePassword: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/user/change-password`,
+        url: `${BACKEND_BASE_URL}/api/user/change-password`,
         method: "PATCH",
         body: data,
       }),
@@ -220,7 +218,7 @@ export const authApi = apiSlice.injectEndpoints({
     // updateProfile password
     updateProfile: builder.mutation({
       query: ({ id, ...data }) => ({
-        url: `${url}/api/user/update-user/${id}`,
+        url: `${BACKEND_BASE_URL}/api/user/update-user/${id}`,
         method: "PUT",
         body: data,
       }),

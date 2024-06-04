@@ -70,6 +70,7 @@ const DetailsWrapper = ({
         <div className="tp-product-details-stock mb-10">
           <span>{status}</span>
         </div>
+        {/*FIXME: URGENT */}
         <div className="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
           <div className="tp-product-details-rating">
             <Rating

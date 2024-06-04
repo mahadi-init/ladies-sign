@@ -32,11 +32,16 @@ const ColorFilter = ({ setCurrPage }) => {
     content = <ErrorMsg msg="No Products found!" />;
   }
   if (!isLoading && !isError && products?.data?.length > 0) {
-    const product_items = products.data;
+    const colors = [];
 
-    // HACK: WORK ON THIS
     content = products.data.map((item, i) => {
       return item.variants.map((variant) => {
+        if (colors.includes(variant.color)) {
+          return;
+        }
+
+        colors.push(variant.color);
+
         return (
           <li key={i}>
             <div className="tp-shop-widget-checkbox-circle">

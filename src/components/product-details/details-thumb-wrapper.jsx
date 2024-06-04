@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PopupVideo from "../common/popup-video";
 
 const DetailsThumbWrapper = ({
-  imageURLs,
+  variants,
   handleImageActive,
   activeImg,
   imgWidth = 416,
@@ -17,7 +17,7 @@ const DetailsThumbWrapper = ({
       <div className="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
         <nav>
           <div className="nav nav-tabs flex-sm-column">
-            {imageURLs?.map((item, i) => (
+            {variants?.map((item, i) => (
               <button
                 key={i}
                 className={`nav-link ${item.img === activeImg ? "active" : ""}`}
@@ -28,10 +28,32 @@ const DetailsThumbWrapper = ({
                   alt="image"
                   width={78}
                   height={100}
-                  style={{ width: "100%", height: "100%" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "12px",
+                  }}
                 />
               </button>
             ))}
+
+            <button
+              onClick={() => setIsVideoOpen(true)}
+              style={{
+                background: "purple",
+                width: "78px",
+                height: "100px",
+                padding: "16px",
+                borderRadius: "12px",
+              }}
+            >
+              <a
+                className="cursor-pointer popup-video"
+                style={{ color: "white" }}
+              >
+                <i className="fas fa-play" color="white"></i>
+              </a>
+            </button>
           </div>
         </nav>
         <div className="tab-content m-img">
@@ -48,16 +70,6 @@ const DetailsThumbWrapper = ({
                   <span className="product-hot">out-stock</span>
                 )}
               </div>
-              {videoId && (
-                <div
-                  onClick={() => setIsVideoOpen(true)}
-                  className="tp-product-details-thumb-video"
-                >
-                  <a className="tp-product-details-thumb-video-btn cursor-pointer popup-video">
-                    <i className="fas fa-play"></i>
-                  </a>
-                </div>
-              )}
             </div>
           </div>
         </div>

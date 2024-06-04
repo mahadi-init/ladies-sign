@@ -16,12 +16,12 @@ export const compareSlice = createSlice({
       );
       if (!isExist) {
         state.compareItems.push(payload);
-        notifySuccess(`${payload.title} added to compare`);
+        notifySuccess(`${payload.name} added to compare`);
       } else {
         state.compareItems = state.compareItems.filter(
           (item) => item._id !== payload._id,
         );
-        notifyError(`${payload.title} removed from compare`);
+        notifyError(`${payload.name} removed from compare`);
       }
       setLocalStorage("compare_items", state.compareItems);
     },
@@ -30,7 +30,7 @@ export const compareSlice = createSlice({
         (item) => item._id !== payload.id,
       );
       setLocalStorage("compare_items", state.compareItems);
-      notifyError(`${payload.title} removed from compare`);
+      notifyError(`${payload.name} removed from compare`);
     },
     get_compare_products: (state, { payload }) => {
       state.compareItems = getLocalStorage("compare_items");

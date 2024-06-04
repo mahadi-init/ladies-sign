@@ -22,6 +22,7 @@ const Auth = () => {
             fontSize: "32px",
             fontWeight: "bold",
             paddingBottom: "15px",
+            color: "black",
           }}
         >
           Login to continue

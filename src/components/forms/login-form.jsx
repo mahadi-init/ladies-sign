@@ -11,6 +11,7 @@ import {
 } from "@/redux/features/auth/authApi";
 import { CloseEye, OpenEye } from "@/svg";
 import ErrorMsg from "../common/error-msg";
+import Link from "next/link";
 
 // schema
 const schema = Yup.object().shape({
@@ -45,7 +46,7 @@ const LoginForm = () => {
       res = await loginUser(data);
     }
 
-    if (res.data.success) {
+    if (res.data?.success) {
       notifySuccess("Login successfully");
       router.push(redirect || "/");
     } else {
@@ -97,14 +98,30 @@ const LoginForm = () => {
           <input id="isSeller" type="checkbox" {...register("isSeller")} />
           <label htmlFor="isSeller">Login as seller</label>
         </div>
-        {/* <div className="tp-login-forgot"> */}
-        {/*   <Link href="/forgot">Forgot Password?</Link> */}
-        {/* </div> */}
+        <div className="tp-login-forgot">
+          <Link href="/forgot">Forgot Password?</Link>
+        </div>
       </div>
-      <div className="tp-login-bottom">
+      <div
+        className="tp-login-bottom"
+        style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+      >
         <button type="submit" className="tp-login-btn w-100">
           Login
         </button>
+        <div
+          style={{
+            display: "flex",
+            gap: "4px",
+            alignSelf: "center",
+            fontSize: "16px",
+          }}
+        >
+          <p style={{ color: "black" }}>New here ?</p>
+          <Link href="/register" style={{ color: "blue" }}>
+            Register
+          </Link>
+        </div>
       </div>
     </form>
   );

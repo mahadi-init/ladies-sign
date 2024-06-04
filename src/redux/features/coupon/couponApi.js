@@ -6,9 +6,8 @@ const url = BACKEND_BASE_URL;
 export const authApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    // get offer coupon
     getOfferCoupons: builder.query({
-      query: () => `${url}/coupon/all`,
+      query: () => `${BACKEND_BASE_URL}/coupon/all`,
       providesTags: ["Coupon"],
       keepUnusedDataFor: 600,
     }),

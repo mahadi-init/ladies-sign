@@ -8,10 +8,10 @@ export const shopFilterSlice = createSlice({
   name: "shopFilter",
   initialState,
   reducers: {
-    handleFilterSidebarOpen: (state, { payload }) => {
+    handleFilterSidebarOpen: (state) => {
       state.filterSidebar = true;
     },
-    handleFilterSidebarClose: (state, { payload }) => {
+    handleFilterSidebarClose: (state) => {
       state.filterSidebar = false;
     },
   },

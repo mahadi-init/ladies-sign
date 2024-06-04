@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
           orderQuantity: state.orderQuantity,
         };
         state.cart_products.push(newItem);
-        notifySuccess(`${state.orderQuantity} ${payload.title} added to cart`);
+        notifySuccess(`${state.orderQuantity} ${payload.name} added to cart`);
       } else {
         state.cart_products.map((item) => {
           if (item._id === payload._id) {
@@ -30,7 +30,7 @@ export const cartSlice = createSlice({
                   ? state.orderQuantity + item.orderQuantity
                   : item.orderQuantity + 1;
               notifySuccess(
-                `${state.orderQuantity} ${item.title} added to cart`,
+                `${state.orderQuantity} ${item.name} added to cart`,
               );
             } else {
               notifyError("No more quantity available for this product!");

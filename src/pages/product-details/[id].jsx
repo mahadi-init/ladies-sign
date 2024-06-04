@@ -11,23 +11,23 @@ import ProductDetailsArea from "@/components/product-details/product-details-are
 import PrdDetailsLoader from "@/components/loader/prd-details-loader";
 
 const ProductDetailsPage = ({ query }) => {
-  const { data: result, isLoading, isError } = useGetProductQuery(query.id);
+  const { data, isLoading, isError } = useGetProductQuery(query.id);
   // decide what to render
   let content = null;
   if (isLoading) {
     content = <PrdDetailsLoader loading={isLoading} />;
   }
-  if (!isLoading && isError) {
+  if (!isLoading && data.data === null) {
     content = <ErrorMsg msg="There was an error" />;
   }
-  if (!isLoading && !isError && result) {
-    let product = result.data;
+  if (!isLoading && !isError && data) {
+    let product = data.data;
 
     content = (
       <>
         <ProductDetailsBreadcrumb
           category={product?.category?.name}
-          title={product?.name}
+          name={product?.name}
         />
         <ProductDetailsArea productItem={product} />
       </>

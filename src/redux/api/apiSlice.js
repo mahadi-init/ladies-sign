@@ -7,6 +7,8 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_BASE_URL,
     prepareHeaders: async (headers) => {
+      headers.set("Authorization", `Bearer ${GUEST_BEARER_TOKEN}`);
+
       try {
         const userInfo = Cookies.get("userInfo");
         if (userInfo) {
@@ -14,8 +16,6 @@ export const apiSlice = createApi({
           if (user?.accessToken) {
             headers.set("Authorization", `Bearer ${user.accessToken}`);
           }
-        } else {
-          headers.set("Authorization", `Bearer ${GUEST_BEARER_TOKEN}`);
         }
       } catch (error) {
         console.error("Error parsing user info:", error);
@@ -23,7 +23,7 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
   tagTypes: [
     "Products",
     "Coupon",

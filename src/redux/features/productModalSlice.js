@@ -13,7 +13,7 @@ export const productModalSlice = createSlice({
       state.productItem = payload;
       state.isModalOpen = true;
     },
-    handleModalClose: (state, { payload }) => {
+    handleModalClose: (state) => {
       state.isModalOpen = false;
       state.productItem = null;
     },

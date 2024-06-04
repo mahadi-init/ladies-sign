@@ -2,15 +2,13 @@ import { BACKEND_BASE_URL } from "@/consts/site-data";
 import { apiSlice } from "../../api/apiSlice";
 import { set_client_secret } from "./orderSlice";
 
-const url = BACKEND_BASE_URL;
-
 export const authApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     // createPaymentIntent
     createPaymentIntent: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/order/create-payment-intent`,
+        url: `${BACKEND_BASE_URL}/api/order/create-payment-intent`,
         method: "POST",
         body: data,
       }),
@@ -27,7 +25,7 @@ export const authApi = apiSlice.injectEndpoints({
     // saveOrder
     saveOrder: builder.mutation({
       query: (data) => ({
-        url: `${url}/api/order/saveOrder`,
+        url: `${BACKEND_BASE_URL}/api/order/saveOrder`,
         method: "POST",
         body: data,
       }),

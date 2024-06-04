@@ -1,8 +1,6 @@
 import { BACKEND_BASE_URL } from "@/consts/site-data";
 import { apiSlice } from "../api/apiSlice";
 
-const url = BACKEND_BASE_URL;
-
 export const productApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
@@ -11,7 +9,7 @@ export const productApi = apiSlice.injectEndpoints({
       providesTags: ["Products"],
     }),
     getProductType: builder.query({
-      query: ({ query }) => `${url}/product/find?${query}`,
+      query: ({ query }) => `${BACKEND_BASE_URL}/product/find?${query}`,
       providesTags: ["ProductType"],
     }),
     getOfferProducts: builder.query({

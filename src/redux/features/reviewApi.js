@@ -15,10 +15,7 @@ export const reviewApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => [
-        "Reviews",
-        // { type: "Product", id: arg.productId },
-      ],
+      invalidatesTags: (result, error, arg) => ["Reviews"],
     }),
   }),
 });

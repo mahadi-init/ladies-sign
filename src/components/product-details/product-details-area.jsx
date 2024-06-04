@@ -4,9 +4,12 @@ import DetailsWrapper from "./details-wrapper";
 import DetailsTabNav from "./details-tab-nav";
 import RelatedProducts from "./related-products";
 
+import PopupVideo from "../common/popup-video";
+
 const ProductDetailsArea = ({ productItem }) => {
-  const { _id, img, imageURLs, videoId, status } = productItem || {};
+  const { _id, img, variants, videoId, status } = productItem || {};
   const [activeImg, setActiveImg] = useState(img);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   // active image change when img change
   useEffect(() => {
@@ -26,7 +29,7 @@ const ProductDetailsArea = ({ productItem }) => {
               <DetailsThumbWrapper
                 activeImg={activeImg}
                 handleImageActive={handleImageActive}
-                imageURLs={imageURLs}
+                variants={variants}
                 imgWidth={580}
                 imgHeight={670}
                 videoId={videoId}
@@ -45,7 +48,7 @@ const ProductDetailsArea = ({ productItem }) => {
         </div>
       </div>
 
-      <div className="tp-product-details-bottom pb-140">
+      <div className="mt-40 tp-product-details-bottom pb-140">
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
@@ -54,7 +57,6 @@ const ProductDetailsArea = ({ productItem }) => {
           </div>
         </div>
       </div>
-
       <section className="tp-related-product pt-95 pb-50">
         <div className="container">
           <div className="row">

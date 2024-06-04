@@ -12,6 +12,7 @@ import { useRegisterUserMutation } from "@/redux/features/auth/authApi";
 // schema
 const schema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
+  email: Yup.string().email("Invalid email"),
   phone: Yup.string().required().label("Phone"),
   password: Yup.string().required().min(6).label("Password"),
   remember: Yup.bool()
@@ -37,6 +38,7 @@ const RegisterForm = () => {
   const onSubmit = (data) => {
     registerUser({
       name: data.name,
+      email: data.email,
       phone: data.phone,
       password: data.password,
     }).then((result) => {
@@ -44,10 +46,9 @@ const RegisterForm = () => {
         notifyError("Register Failed");
       } else {
         notifySuccess("Registration Successful");
-        router.push(redirect || "/");
+        router.push(redirect || "/auth");
       }
     });
-    reset();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,6 +68,22 @@ const RegisterForm = () => {
           </div>
           <ErrorMsg msg={errors.name?.message} />
         </div>
+        <div className="tp-login-input-box">
+          <div className="tp-login-input">
+            <input
+              {...register("email")}
+              id="email"
+              name="email"
+              type="email"
+              placeholder="xyz@gmail.com"
+            />
+          </div>
+          <div className="tp-login-input-title">
+            <label htmlFor="email">Email (optional)</label>
+          </div>
+          <ErrorMsg msg={errors.email?.message} />
+        </div>
+
         <div className="tp-login-input-box">
           <div className="tp-login-input">
             <input

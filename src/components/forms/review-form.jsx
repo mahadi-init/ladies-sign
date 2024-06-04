@@ -41,7 +41,7 @@ const ReviewForm = ({ product_id }) => {
     } else {
       const res = await addReview({
         name: user?.name,
-        productId: product_id,
+        product: product_id,
         rating: rating,
         comment: data.comment,
       });
