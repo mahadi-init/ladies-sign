@@ -4,22 +4,9 @@ import DetailsWrapper from "./details-wrapper";
 import DetailsTabNav from "./details-tab-nav";
 import RelatedProducts from "./related-products";
 
-import PopupVideo from "../common/popup-video";
-
 const ProductDetailsArea = ({ productItem }) => {
-  const { _id, img, variants, videoId, status } = productItem || {};
-  const [activeImg, setActiveImg] = useState(img);
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // active image change when img change
-  useEffect(() => {
-    setActiveImg(img);
-  }, [img]);
-
-  // handle image active
-  const handleImageActive = (item) => {
-    setActiveImg(item.img);
-  };
   return (
     <section className="tp-product-details-area">
       <div className="tp-product-details-top pb-115">
@@ -27,20 +14,20 @@ const ProductDetailsArea = ({ productItem }) => {
           <div className="row">
             <div className="col-xl-7 col-lg-6">
               <DetailsThumbWrapper
-                activeImg={activeImg}
-                handleImageActive={handleImageActive}
-                variants={variants}
+                productItem={productItem}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
                 imgWidth={580}
                 imgHeight={670}
-                videoId={videoId}
-                status={status}
+                // videoId={videoId}
               />
             </div>
+
             <div className="col-xl-5 col-lg-6">
               <DetailsWrapper
                 productItem={productItem}
-                handleImageActive={handleImageActive}
-                activeImg={activeImg}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
                 detailsBottom={true}
               />
             </div>
@@ -57,6 +44,7 @@ const ProductDetailsArea = ({ productItem }) => {
           </div>
         </div>
       </div>
+
       <section className="tp-related-product pt-95 pb-50">
         <div className="container">
           <div className="row">
@@ -66,7 +54,7 @@ const ProductDetailsArea = ({ productItem }) => {
             </div>
           </div>
           <div className="row">
-            <RelatedProducts id={_id} />
+            <RelatedProducts id={productItem._id} />
           </div>
         </div>
       </section>

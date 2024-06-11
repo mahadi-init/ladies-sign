@@ -1,56 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import useCartInfo from "@/hooks/use-cart-info";
-import { useState } from "react";
 
 const CartCheckout = () => {
   const { total } = useCartInfo();
-  const [shipCost, setShipCost] = useState(0);
-  // handle shipping cost
-  const handleShippingCost = (value) => {
-    if (value === "free") {
-      setShipCost(0);
-    } else {
-      setShipCost(value);
-    }
-  };
+  const shipCost = 120;
+
   return (
     <div className="tp-cart-checkout-wrapper">
       <div className="tp-cart-checkout-top d-flex align-items-center justify-content-between">
         <span className="tp-cart-checkout-top-title">Subtotal</span>
         <span className="tp-cart-checkout-top-price">৳{total}</span>
       </div>
-      <div className="tp-cart-checkout-shipping">
-        <h4 className="tp-cart-checkout-shipping-title">Shipping</h4>
-        <div className="tp-cart-checkout-shipping-option-wrapper">
-          <div className="tp-cart-checkout-shipping-option">
-            <input id="flat_rate" type="radio" name="shipping" />
-            <label htmlFor="flat_rate" onClick={() => handleShippingCost(20)}>
-              Inside Dhaka City: <span>৳60.00</span>
-            </label>
-          </div>
-          <div className="tp-cart-checkout-shipping-option">
-            <input id="local_pickup" type="radio" name="shipping" />
-            <label
-              htmlFor="local_pickup"
-              onClick={() => handleShippingCost(25)}
-            >
-              Outside Dhaka City: <span> ৳120.00</span>
-            </label>
-          </div>
-          <div>
-            <p>You have to choose a shipping cost in next page. So, you can skip this.</p>
-          </div>
-          {/* <div className="tp-cart-checkout-shipping-option">
-            <input id="free_shipping" type="radio" name="shipping" />
-            <label
-              onClick={() => handleShippingCost("free")}
-              htmlFor="free_shipping"
-            >
-              Free shipping
-            </label>
-          </div> */}
-        </div>
+      <div className="tp-cart-checkout-shipping d-flex align-items-center justify-content-between">
+        <h5 className="tp-cart-checkout-shipping-title">Shipping Cost</h5>
+        <h5 className="tp-cart-checkout-shipping-title">৳120</h5>
       </div>
       <div className="tp-cart-checkout-total d-flex align-items-center justify-content-between">
         <span>Total</span>

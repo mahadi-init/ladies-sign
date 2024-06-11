@@ -18,7 +18,6 @@ import { CartTwo, CategoryMenu, Compare, Menu, Phone, Wishlist } from "@/svg";
 const Header = () => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const [isOffCanvasOpen, setIsCanvasOpen] = useState(false);
-  const [isCategoryActive, setIsCategoryActive] = useState(false);
   const { quantity } = useCartInfo();
   const { sticky } = useSticky();
   const dispatch = useDispatch();
@@ -78,10 +77,10 @@ const Header = () => {
             <div className="container">
               <div className="tp-mega-menu-wrapper p-relative">
                 <div className="row align-items-center">
-                  <div className="col-xl-3 col-lg-3">
-                    {/* category start */}
-                    <div className="tp-header-category tp-category-menu tp-header-category-toggle">
-                      <button
+                  {/* <div className="col-xl-3 col-lg-3"> */}
+                  {/* category start */}
+                  {/* <div className="tp-header-category tp-category-menu tp-header-category-toggle"> */}
+                  {/* <button
                         onClick={() => setIsCategoryActive(!isCategoryActive)}
                         className="tp-category-menu-btn tp-category-menu-toggle"
                       >
@@ -95,10 +94,10 @@ const Header = () => {
                           categoryType="electronics"
                           isCategoryActive={isCategoryActive}
                         />
-                      </nav>
-                    </div>
-                    {/* category end */}
-                  </div>
+                      </nav> */}
+                  {/* </div> */}
+                  {/* category end */}
+                  {/* </div> */}
                   <div className="col-xl-6 col-lg-6">
                     <div className="main-menu menu-style-1">
                       <nav className="tp-main-menu-content">
@@ -106,7 +105,7 @@ const Header = () => {
                       </nav>
                     </div>
                   </div>
-                  <div className="col-xl-3 col-lg-3">
+                  <div className="col-xl-6 col-lg-3">
                     <div className="tp-header-contact d-flex align-items-center justify-content-end">
                       <div className="tp-header-contact-icon">
                         <span>
@@ -114,7 +113,7 @@ const Header = () => {
                         </span>
                       </div>
                       <div className="tp-header-contact-content">
-                        <h5>Hotline:</h5>
+                        <h5>হটলাইন:</h5>
                         <p>
                           <a href="tel:+8801637009327">+8801637009327</a>
                         </p>

@@ -40,7 +40,7 @@ const ProductSmArea = () => {
           <div className="tp-product-sm-list mb-50">
             <div className="tp-section-title-wrapper mb-40">
               <h3 className="tp-section-title tp-section-title-sm">
-                Discount Products
+                সাশ্রয়ী পণ্য
                 <ShapeLineSm />
               </h3>
             </div>
@@ -55,7 +55,7 @@ const ProductSmArea = () => {
           <div className="tp-product-sm-list mb-50">
             <div className="tp-section-title-wrapper mb-40">
               <h3 className="tp-section-title tp-section-title-sm">
-                Featured Products
+                সেরা পণ্য
                 <ShapeLineSm />
               </h3>
             </div>
@@ -71,7 +71,7 @@ const ProductSmArea = () => {
           <div className="tp-product-sm-list mb-50">
             <div className="tp-section-title-wrapper mb-40">
               <h3 className="tp-section-title tp-section-title-sm">
-                Selling Products
+                জনপ্রিয় পণ্য
                 <ShapeLineSm />
               </h3>
             </div>

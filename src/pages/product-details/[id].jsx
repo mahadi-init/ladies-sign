@@ -12,27 +12,28 @@ import PrdDetailsLoader from "@/components/loader/prd-details-loader";
 
 const ProductDetailsPage = ({ query }) => {
   const { data, isLoading, isError } = useGetProductQuery(query.id);
-  // decide what to render
+
   let content = null;
+
   if (isLoading) {
     content = <PrdDetailsLoader loading={isLoading} />;
   }
+
   if (!isLoading && data.data === null) {
     content = <ErrorMsg msg="There was an error" />;
   }
+
   if (!isLoading && !isError && data) {
     let product = data.data;
 
     content = (
       <>
-        <ProductDetailsBreadcrumb
-          category={product?.category?.name}
-          name={product?.name}
-        />
+        <ProductDetailsBreadcrumb name={product?.name} />
         <ProductDetailsArea productItem={product} />
       </>
     );
   }
+
   return (
     <Wrapper>
       <SEO pageTitle="Product Details" />

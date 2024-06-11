@@ -1,51 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Rating } from "react-simple-star-rating";
-import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
-// internal
 import { Cart, QuickView, Wishlist } from "@/svg";
-import Timer from "@/components/common/timer";
 import { handleProductModal } from "@/redux/features/productModalSlice";
 import { add_cart_product } from "@/redux/features/cartSlice";
 import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 
 const ProductItem = ({ product, offer_style = false }) => {
-  const {
-    _id,
-    img,
-    category,
-    name,
-    reviews,
-    price,
-    discount,
-    status,
-    offerDate,
-  } = product || {};
-  console.log(status);
+  const { _id, name, variants, description, discount, status } = product || {};
+
   const { cart_products } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
   const isAddedToCart = cart_products.some((prd) => prd._id === _id);
   const isAddedToWishlist = wishlist.some((prd) => prd._id === _id);
   const dispatch = useDispatch();
-  const [ratingVal, setRatingVal] = useState(0);
-  useEffect(() => {
-    if (reviews && reviews.length > 0) {
-      const rating =
-        reviews.reduce((acc, review) => acc + review.rating, 0) /
-        reviews.length;
-      setRatingVal(rating);
-    } else {
-      setRatingVal(0);
-    }
-  }, [reviews]);
 
-  // handle add product
+  const getPrice = () => {
+    if (!variants) {
+      return;
+    }
+
+    let totalPrice = 0;
+    let avgPrice = 0;
+
+    variants.map((item) => {
+      totalPrice += item.price;
+    });
+
+    avgPrice = totalPrice / variants.length;
+
+    return avgPrice;
+  };
+
   const handleAddProduct = (prd) => {
     dispatch(add_cart_product(prd));
   };
-  // handle wishlist product
   const handleWishlistProduct = (prd) => {
     dispatch(add_to_wishlist(prd));
   };
@@ -60,7 +50,7 @@ const ProductItem = ({ product, offer_style = false }) => {
         <div className="tp-product-thumb p-relative fix">
           <Link href={`/product-details/${_id}`}>
             <Image
-              src={img}
+              src={variants[0].img}
               width="0"
               height="0"
               sizes="100vw"
@@ -124,15 +114,24 @@ const ProductItem = ({ product, offer_style = false }) => {
             </div>
           </div>
         </div>
-        {/*  product content */}
+
         <div className="tp-product-content">
-          <div className="tp-product-category">
-            <a href="#">{category?.name}</a>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h3 className="tp-product-title mb-10">
+              <Link href={`/product-details/${_id}`}>{name}</Link>
+            </h3>
+            <h3 className="tp-product-title mb-10" style={{ color: "gray" }}>
+              <Link href={`/product-details/${_id}`}>
+                {variants.length === 0
+                  ? "(Single variant)"
+                  : `(${variants.length} variants)`}
+              </Link>
+            </h3>
           </div>
-          <h3 className="tp-product-title">
-            <Link href={`/product-details/${_id}`}>{name}</Link>
-          </h3>
-          <div className="tp-product-rating d-flex align-items-center">
+          <div className="tp-product-category">
+            {description.substring(0, 150)}...
+          </div>
+          {/* <div className="tp-product-rating d-flex align-items-center">
             <div className="tp-product-rating-icon">
               <Rating
                 allowFraction
@@ -146,27 +145,48 @@ const ProductItem = ({ product, offer_style = false }) => {
                 ({reviews && reviews.length > 0 ? reviews.length : 0} Review)
               </span>
             </div>
-          </div>
-          <div className="tp-product-price-wrapper">
-            {discount > 0 ? (
-              <>
-                <span className="tp-product-price old-price">৳{price}</span>
+          </div> */}
+
+          <div
+            className="d-flex"
+            style={{ justifyContent: "space-between", alignItems: "center" }}
+          >
+            <div className="tp-product-price-wrapper mt-2">
+              {discount > 0 ? (
+                <>
+                  <span className="tp-product-price old-price">
+                    ৳{variants[0].price}
+                  </span>
+                  <span className="tp-product-price new-price">
+                    {" "}
+                    ৳
+                    {(
+                      Number(variants[0].price) -
+                      (Number(variants[0].price) * Number(discount)) / 100
+                    ).toFixed(2)}
+                  </span>
+                </>
+              ) : (
                 <span className="tp-product-price new-price">
-                  {" "}
-                  ৳
-                  {(
-                    Number(price) -
-                    (Number(price) * Number(discount)) / 100
-                  ).toFixed(2)}
+                  ৳{parseFloat(variants[0].price).toFixed(2)}
                 </span>
-              </>
-            ) : (
-              <span className="tp-product-price new-price">
-                ৳{parseFloat(price).toFixed(2)}
-              </span>
-            )}
+              )}
+            </div>
+
+            <div
+              className="tp-product-category"
+              style={{
+                color: "white",
+                fontWeight: "sky",
+                padding: "5px",
+                background: "green",
+                borderRadius: "5px",
+              }}
+            >
+              {status}
+            </div>
           </div>
-          {offer_style && (
+          {/* {offer_style && (
             <div className="tp-product-countdown">
               <div className="tp-product-countdown-inner">
                 {dayjs().isAfter(offerDate?.endDate) ? (
@@ -189,7 +209,7 @@ const ProductItem = ({ product, offer_style = false }) => {
                 )}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </>

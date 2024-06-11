@@ -25,26 +25,8 @@ const Auth = () => {
             color: "black",
           }}
         >
-          Create new Account
+          নতুন সেলার একাউন্ট তৈরী করুন
         </p>
-        <div
-          style={{
-            textAlign: "center",
-            fontSize: "16px",
-            fontWeight: "500",
-            marginBottom: "18px",
-          }}
-        >
-          Register as a seller?
-          <Link
-            style={{ color: "blue", marginLeft: "8px" }}
-            href="https://ladies-sign-admin.vercel.app/auth/signup"
-            target="_blank"
-          >
-            Click here
-          </Link>
-        </div>
-
         <RegisterForm />
       </div>
       <Footer primary_style={true} />

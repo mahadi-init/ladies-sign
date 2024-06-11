@@ -27,17 +27,20 @@ const SingleOrder = ({ params }) => {
   if (!isLoading && !isError) {
     const {
       name,
-      country,
-      city,
-      contact,
+      phone,
       invoice,
       createdAt,
+      status,
       cart,
       shippingCost,
-      discount,
-      totalAmount,
-      paymentMethod,
-    } = order.order;
+      // discount,
+      total,
+      note,
+      // paymentMethod,
+    } = order.data;
+
+    console.log(order.data);
+
     content = (
       <>
         <section className="invoice__area pt-120 pb-120">
@@ -93,7 +96,7 @@ const SingleOrder = ({ params }) => {
                               </p>
                             </div>
                             <p>
-                              2879 Elk Creek Road <br /> Stone Mountain, Georgia{" "}
+                              Akanada bari <br /> Jamalpur, Bangladesh
                             </p>
                           </div>
                         </div>
@@ -114,9 +117,10 @@ const SingleOrder = ({ params }) => {
                   <div className="col-md-6 col-sm-8">
                     <div className="invoice__customer-details">
                       <h4 className="mb-10 text-uppercase">{name}</h4>
-                      <p className="mb-0 text-uppercase">{country}</p>
-                      <p className="mb-0 text-uppercase">{city}</p>
-                      <p className="mb-0">{contact}</p>
+                      {/* <p className="mb-0 text-uppercase">{country}</p> */}
+                      {/* <p className="mb-0 text-uppercase">{city}</p> */}
+                      <p className="mb-0">{phone}</p>
+                      <p className="mb-0">{note}</p>
                     </div>
                   </div>
                   <div className="col-md-6 col-sm-4">
@@ -147,8 +151,8 @@ const SingleOrder = ({ params }) => {
                     {cart.map((item, i) => (
                       <tr key={i}>
                         <td>{i + 1}</td>
-                        <td>{item.title}</td>
-                        <td>{item.orderQuantity}</td>
+                        <td>{item.name}</td>
+                        <td>{item.quantity}</td>
                         <td>${item.price}</td>
                         <td>${item.price * item.orderQuantity}</td>
                       </tr>
@@ -160,10 +164,14 @@ const SingleOrder = ({ params }) => {
                 <div className="row">
                   <div className="col-lg-3 col-md-4">
                     <div className="invoice__payment-method mb-30">
+                      <h5 className="mb-0">Status</h5>
+                      <p className="tp-font-medium text-uppercase">{status}</p>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-md-4">
+                    <div className="invoice__payment-method mb-30">
                       <h5 className="mb-0">Payment Method</h5>
-                      <p className="tp-font-medium text-uppercase">
-                        {paymentMethod}
-                      </p>
+                      <p className="tp-font-medium text-uppercase">COD</p>
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-4">
@@ -172,17 +180,17 @@ const SingleOrder = ({ params }) => {
                       <p className="tp-font-medium">${shippingCost}</p>
                     </div>
                   </div>
-                  <div className="col-lg-3 col-md-4">
+                  {/* <div className="col-lg-3 col-md-4">
                     <div className="invoice__discount-cost mb-30">
                       <h5 className="mb-0">Discount</h5>
                       <p className="tp-font-medium">${discount.toFixed(2)}</p>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-lg-3 col-md-4">
                     <div className="invoice__total-ammount mb-30">
                       <h5 className="mb-0">Total Ammount</h5>
                       <p className="tp-font-medium text-danger">
-                        <strong>${parseInt(totalAmount).toFixed(2)}</strong>
+                        <strong>${parseInt(total).toFixed(2)}</strong>
                       </p>
                     </div>
                   </div>

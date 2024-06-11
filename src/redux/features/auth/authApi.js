@@ -6,36 +6,36 @@ import { userLoggedIn } from "./authSlice";
 export const authApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    registerUser: builder.mutation({
+    registration: builder.mutation({
       query: (data) => ({
-        url: `${BACKEND_BASE_URL}/user/register`,
+        url: `${BACKEND_BASE_URL}/seller/register`,
         method: "POST",
         body: data,
       }),
 
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
+      // async onQueryStarted(_, { queryFulfilled, dispatch }) {
+      //   try {
+      //     const result = await queryFulfilled;
 
-          Cookies.set(
-            "userInfo",
-            JSON.stringify({
-              accessToken: result.data.data.token,
-              user: result.data.data.user,
-            }),
-            { expires: 0.5 },
-          );
+      //     Cookies.set(
+      //       "userInfo",
+      //       JSON.stringify({
+      //         accessToken: result.data.data.token,
+      //         user: result.data.data.user,
+      //       }),
+      //       { expires: 0.5 },
+      //     );
 
-          dispatch(
-            userLoggedIn({
-              accessToken: result.data.data.token,
-              user: result.data.data.user,
-            }),
-          );
-        } catch (err) {
-          // do nothing
-        }
-      },
+      //     dispatch(
+      //       userLoggedIn({
+      //         accessToken: result.data.data.token,
+      //         user: result.data.data.user,
+      //       }),
+      //     );
+      //   } catch (err) {
+      //     // do nothing
+      //   }
+      // },
     }),
     // signUpProvider
     // signUpProvider: builder.mutation({
@@ -69,9 +69,46 @@ export const authApi = apiSlice.injectEndpoints({
     //   },
     // }),
     // login
-    loginUser: builder.mutation({
+    // loginUser: builder.mutation({
+    //   query: (data) => ({
+    //     url: `${BACKEND_BASE_URL}/user/login`,
+    //     method: "POST",
+    //     body: data,
+    //   }),
+
+    //   async onQueryStarted(_, { queryFulfilled, dispatch }) {
+    //     try {
+    //       const res = await queryFulfilled;
+    //       const data = res.data;
+
+    //       if (!data.success) {
+    //         throw new Error();
+    //       }
+
+    //       Cookies.set(
+    //         "userInfo",
+    //         JSON.stringify({
+    //           user: data.data,
+    //           accessToken: data.token,
+    //         }),
+    //         { expires: 0.5 },
+    //       );
+
+    //       dispatch(
+    //         userLoggedIn({
+    //           user: data.data,
+    //           accessToken: data.token,
+    //           role: "user",
+    //         }),
+    //       );
+    //     } catch (err) {
+    //       // do nothing
+    //     }
+    //   },
+    // }),
+    login: builder.mutation({
       query: (data) => ({
-        url: `${BACKEND_BASE_URL}/user/login`,
+        url: `${BACKEND_BASE_URL}/auth/login?role=seller`,
         method: "POST",
         body: data,
       }),
@@ -98,45 +135,7 @@ export const authApi = apiSlice.injectEndpoints({
             userLoggedIn({
               user: data.data,
               accessToken: data.token,
-              role: "user",
-            }),
-          );
-        } catch (err) {
-          // do nothing
-        }
-      },
-    }),
-    loginSeller: builder.mutation({
-      query: (data) => ({
-        url: `${BACKEND_BASE_URL}/seller/login`,
-        method: "POST",
-        body: data,
-      }),
-
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {
-        try {
-          const res = await queryFulfilled;
-          const data = res.data;
-          console.log(data);
-
-          if (!data.success) {
-            throw new Error();
-          }
-
-          Cookies.set(
-            "userInfo",
-            JSON.stringify({
-              user: data.data,
-              accessToken: data.token,
-            }),
-            { expires: 0.5 },
-          );
-
-          dispatch(
-            userLoggedIn({
-              user: data.data,
-              accessToken: data.token,
-              role: "seller",
+              role: "SELLER",
             }),
           );
 
@@ -146,51 +145,50 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    // get me
-    getUser: builder.query({
-      query: () => `${BACKEND_BASE_URL}/me`,
+    // getUser: builder.query({
+    //   query: () => `${BACKEND_BASE_URL}/me`,
 
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          dispatch(
-            userLoggedIn({
-              user: result.data,
-            }),
-          );
-        } catch (err) {
-          // do nothing
-        }
-      },
-    }),
-    // confirmEmail
-    confirmEmail: builder.query({
-      query: (token) => `${BACKEND_BASE_URL}/api/user/confirmEmail/${token}`,
+    //   async onQueryStarted(_, { queryFulfilled, dispatch }) {
+    //     try {
+    //       const result = await queryFulfilled;
+    //       dispatch(
+    //         userLoggedIn({
+    //           user: result.data,
+    //         }),
+    //       );
+    //     } catch (err) {
+    //       // do nothing
+    //     }
+    //   },
+    // }),
+    // // confirmEmail
+    // confirmEmail: builder.query({
+    //   query: (token) => `${BACKEND_BASE_URL}/api/user/confirmEmail/${token}`,
 
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
+    //   async onQueryStarted(_, { queryFulfilled, dispatch }) {
+    //     try {
+    //       const result = await queryFulfilled;
 
-          Cookies.set(
-            "userInfo",
-            JSON.stringify({
-              accessToken: result.data.data.token,
-              user: result.data.data.user,
-            }),
-            { expires: 0.5 },
-          );
+    //       Cookies.set(
+    //         "userInfo",
+    //         JSON.stringify({
+    //           accessToken: result.data.data.token,
+    //           user: result.data.data.user,
+    //         }),
+    //         { expires: 0.5 },
+    //       );
 
-          dispatch(
-            userLoggedIn({
-              accessToken: result.data.data.token,
-              user: result.data.data.user,
-            }),
-          );
-        } catch (err) {
-          // do nothing
-        }
-      },
-    }),
+    //       dispatch(
+    //         userLoggedIn({
+    //           accessToken: result.data.data.token,
+    //           user: result.data.data.user,
+    //         }),
+    //       );
+    //     } catch (err) {
+    //       // do nothing
+    //     }
+    //   },
+    // }),
     // reset password
     resetPassword: builder.mutation({
       query: (data) => ({
@@ -251,13 +249,14 @@ export const authApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useLoginUserMutation,
-  useLoginSellerMutation,
-  useRegisterUserMutation,
-  useConfirmEmailQuery,
+  // useLoginUserMutation,
+  useRegistrationMutation,
+  useLoginMutation,
+  // useRegisterUserMutation,
+  // useConfirmEmailQuery,
   useResetPasswordMutation,
   useConfirmForgotPasswordMutation,
   useChangePasswordMutation,
   useUpdateProfileMutation,
-  useSignUpProviderMutation,
+  // useSignUpProviderMutation,
 } = authApi;

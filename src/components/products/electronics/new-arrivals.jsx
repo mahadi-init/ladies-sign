@@ -7,6 +7,7 @@ import { NextArr, PrevArr, ShapeLine } from "@/svg";
 import ErrorMsg from "@/components/common/error-msg";
 import ProductItem from "./product-item";
 import HomeNewArrivalPrdLoader from "@/components/loader/home/home-newArrival-prd-loader";
+import Link from "next/link";
 
 // slider setting
 const slider_setting = {
@@ -44,7 +45,7 @@ const NewArrivals = () => {
     data: products,
     isError,
     isLoading,
-  } = useGetProductTypeQuery({ type: "electronics", query: "new=true" });
+  } = useGetProductTypeQuery({ query: "new=true" });
   // decide what to render
   let content = null;
 
@@ -79,11 +80,17 @@ const NewArrivals = () => {
         <div className="container">
           <div className="row align-items-end">
             <div className="col-xl-5 col-sm-6">
-              <div className="tp-section-title-wrapper mb-40">
+              <div
+                className="tp-section-title-wrapper mb-40"
+                // style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <h3 className="tp-section-title">
-                  New Arrivals
+                  নতুন পণ্য
                   <ShapeLine />
                 </h3>
+                {/* <Link href="/shop">
+                  <button className="btn btn-primary">View All</button>
+                </Link> */}
               </div>
             </div>
             <div className="col-xl-7 col-sm-6">

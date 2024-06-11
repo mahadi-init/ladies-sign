@@ -7,8 +7,6 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_BASE_URL,
     prepareHeaders: async (headers) => {
-      headers.set("Authorization", `Bearer ${GUEST_BEARER_TOKEN}`);
-
       try {
         const userInfo = Cookies.get("userInfo");
         if (userInfo) {

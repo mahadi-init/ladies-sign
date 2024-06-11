@@ -25,7 +25,7 @@ export const authApi = apiSlice.injectEndpoints({
     // saveOrder
     saveOrder: builder.mutation({
       query: (data) => ({
-        url: `${BACKEND_BASE_URL}/api/order/saveOrder`,
+        url: `${BACKEND_BASE_URL}/order/add`,
         method: "POST",
         body: data,
       }),
@@ -45,7 +45,7 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     // getUserOrders
     getUserOrders: builder.query({
-      query: () => `${BACKEND_BASE_URL}/orders/me`,
+      query: (phone) => `${BACKEND_BASE_URL}/order/count/me?phone=${phone}`,
       providesTags: ["UserOrders"],
       keepUnusedDataFor: 600,
     }),

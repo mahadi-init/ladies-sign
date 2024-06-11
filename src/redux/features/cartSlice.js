@@ -14,6 +14,7 @@ export const cartSlice = createSlice({
   reducers: {
     add_cart_product: (state, { payload }) => {
       const isExist = state.cart_products.some((i) => i._id === payload._id);
+
       if (!isExist) {
         const newItem = {
           ...payload,
@@ -42,15 +43,18 @@ export const cartSlice = createSlice({
       }
       setLocalStorage("cart_products", state.cart_products);
     },
+
     increment: (state, { payload }) => {
       state.orderQuantity = state.orderQuantity + 1;
     },
+
     decrement: (state, { payload }) => {
       state.orderQuantity =
         state.orderQuantity > 1
           ? state.orderQuantity - 1
           : (state.orderQuantity = 1);
     },
+
     quantityDecrement: (state, { payload }) => {
       state.cart_products.map((item) => {
         if (item._id === payload._id) {
@@ -62,6 +66,7 @@ export const cartSlice = createSlice({
       });
       setLocalStorage("cart_products", state.cart_products);
     },
+
     remove_product: (state, { payload }) => {
       state.cart_products = state.cart_products.filter(
         (item) => item._id !== payload.id,
@@ -69,12 +74,15 @@ export const cartSlice = createSlice({
       setLocalStorage("cart_products", state.cart_products);
       notifyError(`${payload.title} Remove from cart`);
     },
+
     get_cart_products: (state, action) => {
       state.cart_products = getLocalStorage("cart_products");
     },
+
     initialOrderQuantity: (state, { payload }) => {
       state.orderQuantity = 1;
     },
+
     clearCart: (state) => {
       const isClearCart = window.confirm(
         "Are you sure you want to remove all items ?",
@@ -84,9 +92,11 @@ export const cartSlice = createSlice({
       }
       setLocalStorage("cart_products", state.cart_products);
     },
+
     openCartMini: (state, { payload }) => {
       state.cartMiniOpen = true;
     },
+
     closeCartMini: (state, { payload }) => {
       state.cartMiniOpen = false;
     },

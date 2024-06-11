@@ -4,8 +4,10 @@ import ProfileShape from "./profile-shape";
 import NavProfileTab from "./nav-profile-tab";
 
 import MyOrders from "./my-orders";
+import Balance from "./balance";
+import Settings from "./settings";
 
-const ProfileArea = ({ orderData }) => {
+const ProfileArea = ({ data }) => {
   return (
     <>
       <section className="profile__area pt-120 pb-120">
@@ -27,15 +29,41 @@ const ProfileArea = ({ orderData }) => {
                       role="tabpanel"
                       aria-labelledby="nav-profile-tab"
                     >
-                      <NavProfileTab orderData={orderData} />
+                      <NavProfileTab orderData={data?.count} />
                     </div>
+
                     <div
                       className="tab-pane fade"
                       id="nav-order"
                       role="tabpanel"
                       aria-labelledby="nav-order-tab"
                     >
-                      <MyOrders orderData={orderData} />
+                      <MyOrders orderData={data} />
+                    </div>
+
+                    <div
+                      className="tab-pane fade"
+                      id="nav-balance"
+                      role="tabpanel"
+                      aria-labelledby="nav-balance-tab"
+                    >
+                      <Balance />
+                    </div>
+                    {/* <div
+                      className="tab-pane fade"
+                      id="nav-balance"
+                      role="tabpanel"
+                      aria-labelledby="nav-balance-tab"
+                    >
+                      <Balance />
+                    </div> */}
+                    <div
+                      className="tab-pane fade"
+                      id="nav-settings"
+                      role="tabpanel"
+                      aria-labelledby="nav-settings-tab"
+                    >
+                      <Settings />
                     </div>
                   </div>
                 </div>

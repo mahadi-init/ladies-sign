@@ -1,7 +1,7 @@
 import React from "react";
 import { SmDot } from "@/svg";
 
-const ProductDetailsBreadcrumb = ({ category, name }) => {
+const ProductDetailsBreadcrumb = ({ name }) => {
   return (
     <section className="breadcrumb__area breadcrumb__style-2 include-bg pt-50 pb-20">
       <div className="container">
@@ -14,9 +14,6 @@ const ProductDetailsBreadcrumb = ({ category, name }) => {
                 </span>
                 <span>
                   <a href="#">Home</a>
-                </span>
-                <span>
-                  <a href="#">{category}</a>
                 </span>
                 <span>{name}</span>
               </div>

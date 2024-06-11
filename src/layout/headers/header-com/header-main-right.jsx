@@ -1,13 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import Image from "next/image";
 // internal
 import useCartInfo from "@/hooks/use-cart-info";
-import { CartTwo, Compare, Menu, User, Wishlist } from "@/svg";
+import { CartTwo, Compare, Menu, Wishlist } from "@/svg";
 import { openCartMini } from "@/redux/features/cartSlice";
-import { SignInButton } from "@clerk/nextjs";
 import HeaderUserAuth from "./header-user-auth";
+import { ListOrderedIcon } from "lucide-react";
 
 const HeaderMainRight = ({ setIsCanvasOpen }) => {
   const { wishlist } = useSelector((state) => state.wishlist);

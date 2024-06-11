@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 function SingleNav({ active = false, id, title, icon }) {
   return (
@@ -20,7 +21,23 @@ function SingleNav({ active = false, id, title, icon }) {
   );
 }
 
+function SellerNavs() {
+  return (
+    <>
+      <SingleNav id="balance" title="Balance" icon="fa-light fa-wallet" />
+      <SingleNav
+        id="commission"
+        title="Commission"
+        icon="fa-light fa-money-bill"
+      />
+      <SingleNav id="settings" title="Settings" icon="fa-light fa-gear" />
+    </>
+  );
+}
+
 const ProfileNavTab = () => {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <nav>
       <div
@@ -40,6 +57,8 @@ const ProfileNavTab = () => {
           title="My Orders"
           icon="fa-light fa-clipboard-list-check"
         />
+
+        {user && <SellerNavs />}
       </div>
     </nav>
   );

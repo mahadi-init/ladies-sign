@@ -2,9 +2,6 @@ import React from "react";
 import ErrorMsg from "../common/error-msg";
 
 const CheckoutBillingArea = ({ register, errors }) => {
-  // const { user } = useSelector((state) => state.auth);
-  // const session = useSession();
-
   return (
     <div className="tp-checkout-bill-area">
       <h3 className="tp-checkout-bill-title">Billing Details</h3>
@@ -12,124 +9,65 @@ const CheckoutBillingArea = ({ register, errors }) => {
       <div className="tp-checkout-bill-form">
         <div className="tp-checkout-bill-inner">
           <div className="row">
-            <div className="col-md-6">
-              <div className="tp-checkout-input">
-                <label>
-                  First Name <span>*</span>
-                </label>
-                <input
-                  {...register("firstName", {
-                    required: `firstName is required!`,
-                  })}
-                  name="firstName"
-                  id="firstName"
-                  type="text"
-                  placeholder="First Name"
-                />
-                <ErrorMsg msg={errors?.firstName?.message} />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="tp-checkout-input">
-                <label>
-                  Last Name <span>*</span>
-                </label>
-                <input
-                  {...register("lastName", {
-                    required: `lastName is required!`,
-                  })}
-                  name="lastName"
-                  id="lastName"
-                  type="text"
-                  placeholder="Last Name"
-                />
-                <ErrorMsg msg={errors?.lastName?.message} />
-              </div>
-            </div>
-            {/* <div className="col-md-12">
-              <div className="tp-checkout-input">
-                <label>
-                  Country <span>*</span>
-                </label>
-                <input
-                  {...register("country", { required: `country is required!` })}
-                  name="country"
-                  id="country"
-                  type="text"
-                  placeholder="Bangladesh"
-                />
-                <ErrorMsg msg={errors?.lastName?.message} />
-              </div>
-            </div> */}
             <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
-                  Phone <span>*</span>
+                  নাম <span>*</span>
                 </label>
                 <input
-                  {...register("contactNo", {
-                    required: `ContactNumber is required!`,
+                  {...register("name", {
+                    required: `আপনি নাম দেন নি!`,
                   })}
-                  name="contactNo"
-                  id="contactNo"
+                  name="name"
+                  id="name"
                   type="text"
-                  placeholder="Phone"
+                  placeholder="আপনার নাম দিন"
                 />
-                <ErrorMsg msg={errors?.contactNo?.message} />
+                <ErrorMsg msg={errors?.name?.message} />
               </div>
             </div>
             <div className="col-md-12">
               <div className="tp-checkout-input">
                 <label>
-                  Full Address <span>*</span>
+                  ফোন <span>*</span>
                 </label>
                 <input
-                  {...register("address", { required: `Address is required!` })}
+                  {...register("phone", {
+                    required: `আপনি ফোন নাম্বার দেন নি`,
+                  })}
+                  name="phone"
+                  id="phone"
+                  type="text"
+                  placeholder="আপনার ফোন নাম্বার দিন"
+                />
+                <ErrorMsg msg={errors?.phone?.message} />
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="tp-checkout-input">
+                <label>
+                  ঠিকানা <span>*</span>
+                </label>
+                <input
+                  {...register("address", {
+                    required: `আপনি ফোন নাম্বার দেন নি`,
+                  })}
                   name="address"
                   id="address"
                   type="text"
-                  placeholder="#32 Flat 2, Dhanmondi 32, Dhaka"
+                  placeholder="আপনার ঠিকানা দিন"
                 />
                 <ErrorMsg msg={errors?.address?.message} />
               </div>
             </div>
-
-            {/* <div className="col-md-12">
-              <div className="tp-checkout-input">
-                <label>Alternative Phone (recommended)</label>
-                <input
-                  {...register("alternativeContactNo", { required: false })}
-                  name="contactNo"
-                  id="contactNo"
-                  type="text"
-                  placeholder="Alternative Phone"
-                />
-              </div>
-            </div> */}
-            {/* <div className="col-md-12">
-              <div className="tp-checkout-input">
-                <label>
-                  Email address <span>*</span>
-                </label>
-                <input
-                  {...register("email", { required: `Email is required!` })}
-                  name="email"
-                  id="email"
-                  type="email"
-                  placeholder="Email"
-                  defaultValue={user?.email}
-                />
-                <ErrorMsg msg={errors?.email?.message} />
-              </div>
-            </div> */}
             <div className="col-md-12">
               <div className="tp-checkout-input">
-                <label>Order notes (optional)</label>
+                <label>নোট </label>
                 <textarea
-                  {...register("orderNote", { required: false })}
-                  name="orderNote"
-                  id="orderNote"
-                  placeholder="Notes about your order, e.g. special notes for delivery."
+                  {...register("note", { required: false })}
+                  name="note"
+                  id="note"
+                  placeholder="আরো কিছু লিখার থাকলে এখানে লিখুন"
                 />
               </div>
             </div>

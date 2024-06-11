@@ -45,6 +45,7 @@
     "sass": "^1.59.3",
     "sharp": "^0.33.2",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.11",
     "swiper": "^9.1.1",
     "swr": "^2.2.5",
     "yup": "^1.1.1"

@@ -1,57 +1,55 @@
+import * as Yup from "yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import { useRouter } from "next/router";
 import { CloseEye, OpenEye } from "@/svg";
-import ErrorMsg from "../common/error-msg";
+import ErrorMsg from "@/components/common/error-msg";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { useRegistrationMutation } from "@/redux/features/auth/authApi";
+import { useUpdateSellerInfoMutation } from "@/redux/features/sellerApi";
 
-// schema
 const schema = Yup.object().shape({
-  name: Yup.string().required(`নাম দিতে হবে`).label("Name"),
+  name: Yup.string(),
   email: Yup.string().email("ভুল ইমেইল"),
-  phone: Yup.string().required(`ফোন নম্বর দিতে হবে`).label("Phone"),
-  password: Yup.string()
-    .required(`পাসওয়ার্ড দিতে হবে`)
-    .min(6)
-    .label("Password"),
-  address: Yup.string().required(`ঠিকানা দিতে হবে`),
-  whatsapp: Yup.string().required(`হোয়াটস্যাপ নম্বর দিতে হবে`),
-  facebookProfile: Yup.string().required(`ফেইসবুক প্রোফাইল দিতে হবে`),
+  phone: Yup.string(),
+  password: Yup.string().min(6).label("Password"),
+  address: Yup.string(),
+  whatsapp: Yup.string(),
+  facebookProfile: Yup.string(),
   facebookPage: Yup.string(),
+  nid: Yup.string(),
+  license: Yup.string(),
 });
 
-const RegisterForm = () => {
-  const [showPass, setShowPass] = useState(false);
-  const [registerSeller, {}] = useRegistrationMutation();
-  const router = useRouter();
-  const { redirect } = router.query;
+export default function Settings() {
+  // const [showPass, setShowPass] = useState(false);
+  const [updateSellerInfo, {}] = useUpdateSellerInfoMutation();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
+    // watch,
     // reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    registerSeller(data).then((result) => {
-      if (result?.error) {
-        notifyError("Registration failed Failed");
-      } else {
-        notifySuccess("Registration Successful");
-        router.push(redirect || "/auth");
-      }
-    });
+  const onSubmit = async (data) => {
+    const res = await updateSellerInfo(data);
+
+    if (res?.data?.success) {
+      notifySuccess("Information updated");
+    } else {
+      notifyError("Update failed");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <p style={{ textAlign: "center", fontWeight: "bold" }}>
+        Update Your Profile
+      </p>
       <div className="tp-login-input-wrapper">
         <div className="tp-login-input-box">
           <div className="tp-login-input">
@@ -79,7 +77,7 @@ const RegisterForm = () => {
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="email">ইমেইল (অপশনাল)</label>
+            <label htmlFor="email">ইমেইল</label>
           </div>
           <ErrorMsg msg={errors.email?.message} />
         </div>
@@ -89,9 +87,11 @@ const RegisterForm = () => {
             <input
               {...register("phone")}
               id="phone"
+              style={{ background: "#e7e4e4" }}
               name="phone"
               type="tel"
-              placeholder="ফোন নম্বর দিন "
+              placeholder="ফোন নম্বর আপডেট করতে অ্যাডমিন এর সাথে যোগাযোগ করুন"
+              disabled={true}
             />
           </div>
           <div className="tp-login-input-title">
@@ -99,29 +99,6 @@ const RegisterForm = () => {
           </div>
           <ErrorMsg msg={errors.phone?.message} />
         </div>
-        <div className="tp-login-input-box">
-          <div className="p-relative">
-            <div className="tp-login-input">
-              <input
-                {...register("password")}
-                id="password"
-                name="password"
-                type={showPass ? "text" : "password"}
-                placeholder="পাসওয়ার্ড দিন (ছয় অক্ষর এর বেশি)"
-              />
-            </div>
-            <div className="tp-login-input-eye" id="password-show-toggle">
-              <span className="open-eye" onClick={() => setShowPass(!showPass)}>
-                {showPass ? <CloseEye /> : <OpenEye />}
-              </span>
-            </div>
-            <div className="tp-login-input-title">
-              <label htmlFor="password">পাসওয়ার্ড দিন</label>
-            </div>
-          </div>
-          <ErrorMsg msg={errors.password?.message} />
-        </div>
-
         <div className="tp-login-input-box">
           <div className="tp-login-input">
             <input
@@ -157,6 +134,38 @@ const RegisterForm = () => {
         <div className="tp-login-input-box">
           <div className="tp-login-input">
             <input
+              {...register("nid")}
+              id="nid"
+              name="nid"
+              type="text"
+              placeholder="ন্যাশনাল আইডি দিন"
+            />
+          </div>
+          <div className="tp-login-input-title">
+            <label htmlFor="nid">ন্যাশনাল আইডি</label>
+          </div>
+          <ErrorMsg msg={errors.nid?.message} />
+        </div>
+
+        <div className="tp-login-input-box">
+          <div className="tp-login-input">
+            <input
+              {...register("license")}
+              id="license"
+              name="license"
+              type="text"
+              placeholder="লাইসেন্স আইডি দিন"
+            />
+          </div>
+          <div className="tp-login-input-title">
+            <label htmlFor="license">লাইসেন্স আইডি</label>
+          </div>
+          <ErrorMsg msg={errors.license?.message} />
+        </div>
+
+        <div className="tp-login-input-box">
+          <div className="tp-login-input">
+            <input
               {...register("facebookProfile")}
               id="facebookProfile"
               name="facebookProfile"
@@ -183,7 +192,7 @@ const RegisterForm = () => {
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="facebookPage">ফেইসবুক পেজ (অপশনাল)</label>
+            <label htmlFor="facebookPage">ফেইসবুক পেজ</label>
           </div>
           <ErrorMsg msg={errors.facebookPage?.message} />
         </div>
@@ -207,11 +216,9 @@ const RegisterForm = () => {
       </div> */}
       <div className="tp-login-bottom">
         <button type="submit" className="tp-login-btn w-100">
-          রেজিস্টার
+          Update
         </button>
       </div>
     </form>
   );
-};
-
-export default RegisterForm;
+}

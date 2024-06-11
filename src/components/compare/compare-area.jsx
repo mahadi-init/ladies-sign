@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
-// internal
 import { add_cart_product } from "@/redux/features/cartSlice";
 import { remove_compare_product } from "@/redux/features/compareSlice";
 

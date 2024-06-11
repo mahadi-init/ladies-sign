@@ -21,11 +21,10 @@ export default function Home() {
       <Header />
       <HomeHeroSlider />
       <FeatureArea />
-      {/* <CategoryView /> */}
-      <BannerArea />
       <ProductArea />
       <ProductBanner />
       <NewArrivals />
+      <BannerArea />
       <ProductSmArea />
       <Footer />
     </Wrapper>

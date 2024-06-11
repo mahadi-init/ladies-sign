@@ -7,44 +7,37 @@ export default function HeaderUserAuth() {
 
   return (
     <>
+      <div className="tp-header-login-icon mr-5">
+        <CircleUser size={34} />
+      </div>
       <>
-        <div className="tp-header-login-icon" style={{ marginRight: "5px" }}>
-          <CircleUser size={34} />
-        </div>
-        {user ? (
-          <>
-            <Link
-              href="/profile"
-              className="tp-header-login-content d-none d-xl-block"
-            >
-              <span>Hello</span>
+        <Link
+          href="/profile"
+          className="tp-header-login-content d-none d-xl-block"
+        >
+          {user ? (
+            <>
+              <span style={{ fontWeight: "700" }}>স্বাগতম</span>
               <div className="tp-header-login-title">
                 <span style={{ cursor: "pointer", color: "black" }}>
                   {user?.name}
                 </span>
               </div>
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link
-              href="/auth"
-              className="tp-header-login-content d-none d-xl-block"
+            </>
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                color: "black",
+                marginTop: "15px",
+                fontSize: "16px",
+                fontWeight: "600",
+              }}
             >
-              <div
-                style={{
-                  textAlign: "center",
-                  color: "black",
-                  marginTop: "8px",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                }}
-              >
-                Login
-              </div>
-            </Link>
-          </>
-        )}
+              প্রোফাইল
+            </div>
+          )}
+        </Link>
       </>
     </>
   );

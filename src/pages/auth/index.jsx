@@ -25,7 +25,7 @@ const Auth = () => {
             color: "black",
           }}
         >
-          Login to continue
+          সেলার হিসাবে লগইন করুন
         </p>
         <LoginForm />
       </div>

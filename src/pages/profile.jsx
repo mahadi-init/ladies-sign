@@ -6,9 +6,11 @@ import Footer from "@/layout/footers/footer";
 import HeaderTwo from "@/layout/headers/header-2";
 import Wrapper from "@/layout/wrapper";
 import { useGetUserOrdersQuery } from "@/redux/features/order/orderApi";
+import Cookies from "js-cookie";
 
 const ProfilePage = () => {
-  const { data: orderData, isError, isLoading } = useGetUserOrdersQuery();
+  const phone = Cookies.get("customer_phone");
+  const { data, isError, isLoading } = useGetUserOrdersQuery(phone);
 
   if (isLoading) {
     return (
@@ -25,7 +27,7 @@ const ProfilePage = () => {
     <Wrapper>
       <SEO pageTitle="Profile" />
       <HeaderTwo style_2={true} />
-      <ProfileArea orderData={orderData} />
+      <ProfileArea data={data} />
       <Footer style_2={true} />
     </Wrapper>
   );

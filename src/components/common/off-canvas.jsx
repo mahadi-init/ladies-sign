@@ -57,7 +57,7 @@ const OffCanvas = ({
                 </Link>
               </div>
             </div>
-            <div className="offcanvas__category pb-40">
+            {/* <div className="offcanvas__category pb-40">
               <button
                 onClick={() => setIsCategoryActive(!isCategoryActive)}
                 className="tp-offcanvas-category-toggle"
@@ -77,7 +77,7 @@ const OffCanvas = ({
                   />
                 </nav>
               </div>
-            </div>
+            </div> */}
             <div className="tp-main-menu-mobile fix d-lg-none mb-40">
               <MobileMenus />
             </div>
@@ -100,7 +100,7 @@ const OffCanvas = ({
               </Link>
             </div>
           </div>
-          <div className="offcanvas__bottom">
+          {/* <div className="offcanvas__bottom">
             <div className="offcanvas__footer d-flex align-items-center justify-content-between">
               <div className="offcanvas__currency-wrapper currency">
                 <span
@@ -148,7 +148,7 @@ const OffCanvas = ({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* body overlay start */}

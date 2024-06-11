@@ -4,23 +4,23 @@ import { Delivery, Discount, Refund, Support } from "@/svg";
 export const feature_data = [
   {
     icon: <Delivery />,
-    title: "Low Cost Delivery",
-    subtitle: "Orders from all item",
+    title: "কম খরচ এ ডেলিভারি",
+    subtitle: "সব ধরণের পণ্য তে",
   },
   {
     icon: <Refund />,
-    title: "Return & Refund",
-    subtitle: "Money back guarantee",
+    title: "রেট্রান এবং রিফান্ড",
+    subtitle: "মানি ব্যাক গেরান্টি",
   },
   {
     icon: <Discount />,
-    title: "Seller Discount",
-    subtitle: "Discount price for sellers",
+    title: "সেলার ডিসকাউন্ট",
+    subtitle: "সেলার এর জন্য ডিসকাউন্ট",
   },
   {
     icon: <Support />,
-    title: "Support 24/7",
-    subtitle: "Contact us 24 hours a day",
+    title: "সাপোর্ট 24/7",
+    subtitle: "২৪ ঘন্টা সাপোর্ট",
   },
 ];
 
@@ -32,9 +32,9 @@ const FeatureArea = () => {
           {feature_data.map((item, i) => (
             <div key={i} className="col-xl-3 col-lg-6 col-md-6 col-sm-6">
               <div className="tp-feature-item d-flex align-items-start">
-                <div className="tp-feature-icon mr-15">
+                {/* <div className="tp-feature-icon mr-15">
                   <span>{item.icon}</span>
-                </div>
+                </div> */}
                 <div className="tp-feature-content">
                   <h3 className="tp-feature-title">{item.title}</h3>
                   <p>{item.subtitle}</p>

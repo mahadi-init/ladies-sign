@@ -2,28 +2,26 @@ const menu_data = [
   {
     id: 1,
     homes: true,
-    title: "Home",
+    title: "হোম",
     link: "/",
   },
 
   {
     id: 2,
     single_link: true,
-    title: "Shop",
+    title: "পণ্য",
     link: "/shop",
-    sub_menus: [],
   },
-  {
-    id: 3,
-    single_link: true,
-    title: "Coupons",
-    link: "/coupon",
-  },
-
+  // {
+  //   id: 3,
+  //   single_link: true,
+  //   title: "Coupons",
+  //   link: "/coupon",
+  // },
   {
     id: 4,
     single_link: true,
-    title: "Contact",
+    title: "যোগাযোগ",
     link: "/contact",
   },
 ];
@@ -33,37 +31,37 @@ export const mobile_menu = [
   {
     id: 1,
     homes: true,
-    title: "Home",
+    title: "হোম",
     link: "/",
   },
   {
     id: 2,
     single_link: true,
-    title: "Products",
+    title: "পণ্য",
     link: "/shop",
   },
   {
     id: 3,
     single_link: true,
-    title: "Cart",
+    title: "কার্ট",
     link: "/cart",
   },
   {
     id: 4,
     single_link: true,
-    title: "Login",
+    title: "লগইন",
     link: "/auth",
   },
-  {
-    id: 4,
-    single_link: true,
-    title: "Coupons",
-    link: "/coupon",
-  },
+  // {
+  //   id: 4,
+  //   single_link: true,
+  //   title: "Coupons",
+  //   link: "/coupon",
+  // },
   {
     id: 5,
     single_link: true,
-    title: "Contact",
+    title: "যোগাযোগ",
     link: "/contact",
   },
 ];

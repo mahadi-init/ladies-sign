@@ -17,7 +17,7 @@ const CartArea = () => {
           {cart_products.length === 0 && (
             <div className="text-center pt-50">
               <h3>No Cart Items Found</h3>
-              <Link href="/shop" className="tp-cart-checkout-btn mt-20">
+              <Link href="/" className="tp-cart-checkout-btn mt-20">
                 Continue Shipping
               </Link>
             </div>
@@ -49,19 +49,7 @@ const CartArea = () => {
                 </div>
                 <div className="tp-cart-bottom">
                   <div className="row align-items-end">
-                    <div className="col-xl-6 col-md-8">
-                      {/* <div className="tp-cart-coupon">
-                        <form action="#">
-                          <div className="tp-cart-coupon-input-box">
-                            <label>Coupon Code:</label>
-                            <div className="tp-cart-coupon-input d-flex align-items-center">
-                              <input type="text" placeholder="Enter Coupon Code" />
-                              <button type="submit">Apply</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div> */}
-                    </div>
+                    <div className="col-xl-6 col-md-8"></div>
                     <div className="col-xl-6 col-md-4">
                       <div className="tp-cart-update text-md-end mr-30">
                         <button

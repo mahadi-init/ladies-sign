@@ -4,6 +4,7 @@ import { ShapeLine, TabLine } from "@/svg";
 import ProductItem from "./product-item";
 import ErrorMsg from "@/components/common/error-msg";
 import HomePrdLoader from "@/components/loader/home/home-prd-loader";
+import Link from "next/link";
 
 const tabs = ["new", "featured", "topSellers"];
 
@@ -17,27 +18,29 @@ const ProductArea = () => {
   } = useGetProductTypeQuery({
     query: `${activeTab}=true`,
   });
-  // handleActiveTab
-  const handleActiveTab = (tab) => {
-    setActiveTab(tab);
-  };
-  // refetch when active value change
+
+  // const handleActiveTab = (tab) => {
+  //   setActiveTab(tab);
+  // };
+
   useEffect(() => {
     refetch();
   }, [activeTab, refetch]);
 
-  // decide what to render
   let content = null;
 
   if (isLoading) {
     content = <HomePrdLoader loading={isLoading} />;
   }
+
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
   }
+
   if (!isLoading && !isError && products?.data?.length === 0) {
     content = <ErrorMsg msg="No Products found!" />;
   }
+
   if (!isLoading && !isError && products?.data?.length > 0) {
     const product_items = products.data;
     content = product_items.map((prd, i) => (
@@ -46,39 +49,26 @@ const ProductArea = () => {
       </div>
     ));
   }
+
   return (
-    <section className="tp-product-area pb-55">
+    <section className="tp-product-area pb-55 mt-50">
       <div className="container">
         <div className="row align-items-end">
-          <div className="col-xl-5 col-lg-6 col-md-5">
-            <div className="tp-section-title-wrapper mb-40">
-              <h3 className="tp-section-title">
-                Trending Products
-                <ShapeLine />
-              </h3>
-            </div>
+          {/* <div className="col-xl-5 col-lg-6 col-md-5"> */}
+          <div
+            className="tp-section-title-wrapper mb-40"
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <h3 className="tp-section-title">সেরা পণ্য</h3>
+            <Link href="/shop">
+              <button className="btn btn-primary">View All</button>
+            </Link>
           </div>
-          <div className="col-xl-7 col-lg-6 col-md-7">
-            <div className="tp-product-tab tp-product-tab-border mb-45 tp-tab d-flex justify-content-md-end">
-              <ul className="nav nav-tabs justify-content-sm-end">
-                {tabs.map((tab, i) => (
-                  <li key={i} className="nav-item">
-                    <button
-                      onClick={() => handleActiveTab(tab)}
-                      className={`nav-link text-capitalize ${
-                        activeTab === tab ? "active" : ""
-                      }`}
-                    >
-                      {tab.split("-").join(" ")}
-                      <span className="tp-product-tab-line">
-                        <TabLine />
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          {/* </div> */}
         </div>
         <div className="row">{content}</div>
       </div>

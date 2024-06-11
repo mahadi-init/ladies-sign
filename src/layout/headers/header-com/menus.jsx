@@ -1,10 +1,7 @@
 import React from "react";
 import menu_data from "@/data/menu-data";
 import Link from "next/link";
-import {
-  useGetAllProductsQuery,
-  useGetProductTypeQuery,
-} from "@/redux/features/productApi";
+import { useGetAllProductsQuery } from "@/redux/features/productApi";
 import { HomeNewArrivalPrdLoader } from "@/components/loader";
 import ErrorMsg from "@/components/common/error-msg";
 import ProductItem from "@/components/products/electronics/product-item";
@@ -19,7 +16,6 @@ const Menus = () => {
     query: "new=true",
   });
 
-  // decide what to render
   let content = null;
 
   if (isLoading) {
@@ -47,7 +43,6 @@ const Menus = () => {
       </div>
     );
   } else {
-    // If there are no products or an error occurs, set content to an empty array
     content = [];
   }
   return (

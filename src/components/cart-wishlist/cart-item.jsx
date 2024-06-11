@@ -11,7 +11,7 @@ import {
 } from "@/redux/features/cartSlice";
 
 const CartItem = ({ product }) => {
-  const { _id, img, title, price, orderQuantity = 0 } = product || {};
+  const { _id, name, variants, orderQuantity = 0 } = product || {};
 
   const dispatch = useDispatch();
 
@@ -34,16 +34,21 @@ const CartItem = ({ product }) => {
       {/* img */}
       <td className="tp-cart-img">
         <Link href={`/product-details/${_id}`}>
-          <Image src={img} alt="product img" width={70} height={100} />
+          <Image
+            src={variants[0]?.img}
+            alt="product img"
+            width={70}
+            height={100}
+          />
         </Link>
       </td>
       {/* title */}
       <td className="tp-cart-title">
-        <Link href={`/product-details/${_id}`}>{title}</Link>
+        <Link href={`/product-details/${_id}`}>{name}</Link>
       </td>
       {/* price */}
       <td className="tp-cart-price">
-        <span>৳{(price * orderQuantity).toFixed(2)}</span>
+        <span>৳{(variants[0]?.price * orderQuantity).toFixed(2)}</span>
       </td>
       {/* quantity */}
       <td className="tp-cart-quantity">
@@ -71,7 +76,7 @@ const CartItem = ({ product }) => {
       {/* action */}
       <td className="tp-cart-action">
         <button
-          onClick={() => handleRemovePrd({ title, id: _id })}
+          onClick={() => handleRemovePrd({ title: name, id: _id })}
           className="tp-cart-action-btn"
         >
           <Close />

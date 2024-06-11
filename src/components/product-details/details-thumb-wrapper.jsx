@@ -1,17 +1,18 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PopupVideo from "../common/popup-video";
 
 const DetailsThumbWrapper = ({
-  variants,
-  handleImageActive,
-  activeImg,
+  productItem,
+  activeIndex,
+  setActiveIndex,
   imgWidth = 416,
   imgHeight = 480,
-  videoId = false,
-  status,
+  // videoId = true,
 }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const { variants, videoId, status } = productItem || {};
+
   return (
     <>
       <div className="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
@@ -20,8 +21,10 @@ const DetailsThumbWrapper = ({
             {variants?.map((item, i) => (
               <button
                 key={i}
-                className={`nav-link ${item.img === activeImg ? "active" : ""}`}
-                onClick={() => handleImageActive(item)}
+                className={`nav-link ${
+                  item.img === variants[activeIndex]?.img ? "active" : ""
+                }`}
+                onClick={() => setActiveIndex(i)}
               >
                 <Image
                   src={item.img}
@@ -58,11 +61,12 @@ const DetailsThumbWrapper = ({
             )}
           </div>
         </nav>
+
         <div className="tab-content m-img">
           <div className="tab-pane fade show active">
             <div className="tp-product-details-nav-main-thumb p-relative">
               <Image
-                src={activeImg}
+                src={variants[activeIndex]?.img}
                 alt="product img"
                 width={imgWidth}
                 height={imgHeight}
@@ -76,7 +80,7 @@ const DetailsThumbWrapper = ({
           </div>
         </div>
       </div>
-      {/* modal popup start */}
+
       {videoId && (
         <PopupVideo
           isVideoOpen={isVideoOpen}
@@ -84,7 +88,6 @@ const DetailsThumbWrapper = ({
           videoId={videoId}
         />
       )}
-      {/* modal popup end */}
     </>
   );
 };

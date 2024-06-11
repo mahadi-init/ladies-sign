@@ -1,38 +1,45 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-// internal
 import { Box, DeliveryTwo, Processing, Truck } from "@/svg";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
 import Link from "next/link";
 
-//TODO: IMPLEMEMENT ORDER SECTION
 const NavProfileTab = ({ orderData }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
-  // handle logout
+
   const handleLogout = () => {
     dispatch(userLoggedOut());
     router.push("/");
   };
+
   return (
     <div className="profile__main">
-      <div className="profile__main-top pb-80">
+      <div className={`profile__main-top pb-80`}>
         <div className="row align-items-center">
           <div className="col-md-6">
             <div className="profile__main-inner d-flex flex-wrap align-items-center">
               <div className="profile__main-content">
                 <h4 className="profile__main-title">
-                  {user ? (
-                    <a>Welcome {user?.name}</a>
-                  ) : (
-                    <a>You are not logged in</a>
-                  )}
+                  <a>স্বাগতম {user?.name ?? "Guest"}</a>
+                  <br />
                 </h4>
+                <a>
+                  {user ? (
+                    <>
+                      <p>ID: #{user?._id.slice(-7)}</p>
+                      <p>Phone : {user?.phone}</p>
+                    </>
+                  ) : (
+                    "আপনি লগইন ছাড়াই পণ্য কিনতে পারবেন"
+                  )}
+                </a>
               </div>
             </div>
           </div>
+
           <div className="col-md-6">
             <div className="profile__main-logout text-sm-end">
               {user ? (
@@ -40,11 +47,11 @@ const NavProfileTab = ({ orderData }) => {
                   onClick={handleLogout}
                   className="cursor-pointer tp-logout-btn"
                 >
-                  Logout
+                  লগআউট
                 </a>
               ) : (
                 <Link href="/auth" className="cursor-pointer tp-logout-btn">
-                  Login
+                  সেলার লগইন
                 </Link>
               )}
             </div>
@@ -71,7 +78,7 @@ const NavProfileTab = ({ orderData }) => {
               <div className="profile__main-info-icon">
                 <span>
                   <span className="profile-icon-count profile-order">
-                    {orderData?.pending}
+                    {orderData?.pendingOrder}
                   </span>
                   <Processing />
                 </span>

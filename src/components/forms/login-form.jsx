@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 // internal
 import {
+  useLoginMutation,
   useLoginSellerMutation,
   useLoginUserMutation,
 } from "@/redux/features/auth/authApi";
@@ -21,8 +22,8 @@ const schema = Yup.object().shape({
 });
 const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
-  const [loginUser, {}] = useLoginUserMutation();
-  const [loginSeller, {}] = useLoginSellerMutation();
+  // const [loginUser, {}] = useLoginUserMutation();
+  const [login, {}] = useLoginMutation();
   const router = useRouter();
   const { redirect } = router.query;
 
@@ -31,26 +32,19 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    // reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
   // onSubmit
   const onSubmit = async (data) => {
-    const isSeller = data.isSeller;
-    let res;
-
-    if (isSeller) {
-      res = await loginSeller(data);
-    } else {
-      res = await loginUser(data);
-    }
+    const res = await login(data);
 
     if (res.data?.success) {
-      notifySuccess("Login successfully");
-      router.push(redirect || "/");
+      notifySuccess("লগইন সম্পন্ন হয়েছে");
+      router.push(redirect || "/profile");
     } else {
-      notifyError("Account not found");
+      notifyError(res.error.data.message);
     }
   };
   return (
@@ -59,15 +53,15 @@ const LoginForm = () => {
         <div className="tp-login-input-box">
           <div className="tp-login-input">
             <input
-              {...register("phone", { required: `Phone is required!` })}
+              {...register("phone", { required: `ফোন নম্বর দিন!` })}
               name="phone"
               id="phone"
               type="tel"
-              placeholder="01712345678"
+              placeholder="আপনার ফোন নাম্বার দিন"
             />
           </div>
           <div className="tp-login-input-title">
-            <label htmlFor="phone">Your Phone</label>
+            <label htmlFor="phone">ফোন</label>
           </div>
           <ErrorMsg msg={errors.phone?.message} />
         </div>
@@ -75,10 +69,10 @@ const LoginForm = () => {
           <div className="p-relative">
             <div className="tp-login-input">
               <input
-                {...register("password", { required: `Password is required!` })}
+                {...register("password", { required: `পাসওয়ার্ড দিন` })}
                 id="password"
                 type={showPass ? "text" : "password"}
-                placeholder="Min. 6 character"
+                placeholder="আপনার পাসওয়ার্ড দিন"
               />
             </div>
             <div className="tp-login-input-eye" id="password-show-toggle">
@@ -95,11 +89,12 @@ const LoginForm = () => {
       </div>
       <div className="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
         <div className="tp-login-remeber">
-          <input id="isSeller" type="checkbox" {...register("isSeller")} />
-          <label htmlFor="isSeller">Login as seller</label>
+          <Link href="/register" style={{ color: "blue" }}>
+            নতুন একাউন্ট করুন
+          </Link>
         </div>
         <div className="tp-login-forgot">
-          <Link href="/forgot">Forgot Password?</Link>
+          <Link href="/forgot">পাসওয়ার্ড ভুলে গেছেন?</Link>
         </div>
       </div>
       <div
@@ -107,21 +102,8 @@ const LoginForm = () => {
         style={{ display: "flex", flexDirection: "column", gap: "12px" }}
       >
         <button type="submit" className="tp-login-btn w-100">
-          Login
+          লগইন
         </button>
-        <div
-          style={{
-            display: "flex",
-            gap: "4px",
-            alignSelf: "center",
-            fontSize: "16px",
-          }}
-        >
-          <p style={{ color: "black" }}>New here ?</p>
-          <Link href="/register" style={{ color: "blue" }}>
-            Register
-          </Link>
-        </div>
       </div>
     </form>
   );

@@ -11,29 +11,8 @@ import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { add_to_compare } from "@/redux/features/compareSlice";
 
 const ShopListItem = ({ product }) => {
-  const {
-    _id,
-    img,
-    category,
-    title,
-    reviews,
-    price,
-    discount,
-    tags,
-    description,
-  } = product || {};
+  const { _id, name, price, discount, description, variants } = product || {};
   const dispatch = useDispatch();
-  const [ratingVal, setRatingVal] = useState(0);
-  useEffect(() => {
-    if (reviews && reviews.length > 0) {
-      const rating =
-        reviews.reduce((acc, review) => acc + review.rating, 0) /
-        reviews.length;
-      setRatingVal(rating);
-    } else {
-      setRatingVal(0);
-    }
-  }, [reviews]);
 
   // handle add product
   const handleAddProduct = (prd) => {
@@ -53,9 +32,13 @@ const ShopListItem = ({ product }) => {
     <div className="tp-product-list-item d-md-flex">
       <div className="tp-product-list-thumb p-relative fix">
         <Link href={`/product-details/${_id}`}>
-          <Image src={img} alt="product img" width={350} height={310} />
+          <Image
+            src={variants[0].img}
+            alt="product img"
+            width={350}
+            height={310}
+          />
         </Link>
-
         {/* <!-- product action --> */}
         <div className="tp-product-action-2 tp-product-action-blackStyle">
           <div className="tp-product-action-item-2 d-flex flex-column">
@@ -94,39 +77,43 @@ const ShopListItem = ({ product }) => {
       </div>
       <div className="tp-product-list-content">
         <div className="tp-product-content-2 pt-15">
-          <div className="tp-product-tag-2">
+          {/* <div className="tp-product-tag-2">
             {tags?.map((t, i) => (
               <a key={i} href="#">
                 {t}
               </a>
             ))}
-          </div>
+          </div> */}
           <h3 className="tp-product-title-2">
-            <Link href={`/product-details/${_id}`}>{title}</Link>
+            <Link href={`/product-details/${_id}`}>{name}</Link>
           </h3>
-          <div className="tp-product-rating-icon tp-product-rating-icon-2">
+          {/* <div className="tp-product-rating-icon tp-product-rating-icon-2">
             <Rating
               allowFraction
               size={16}
               initialValue={ratingVal}
               readonly={true}
             />
-          </div>
+          </div> */}
           <div className="tp-product-price-wrapper-2">
             {discount > 0 ? (
               <>
-                <span className="tp-product-price-2 new-price">৳{price}</span>
+                <span className="tp-product-price-2 new-price">
+                  ৳{variants[0]?.price}
+                </span>
                 <span className="tp-product-price-2 old-price">
                   {" "}
                   ৳
                   {(
-                    Number(price) -
-                    (Number(price) * Number(discount)) / 100
+                    Number(variants[0]?.price) -
+                    (Number(variants[0]?.price) * Number(discount)) / 100
                   ).toFixed(2)}
                 </span>
               </>
             ) : (
-              <span className="tp-product-price-2 new-price">৳{price}</span>
+              <span className="tp-product-price-2 new-price">
+                ৳{variants[0]?.price}
+              </span>
             )}
           </div>
           <p>{description.substring(0, 100)}</p>
