@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-// internal
 import useCartInfo from "@/hooks/use-cart-info";
 import RenderCartProgress from "./render-cart-progress";
 import empty_cart_img from "@assets/img/product/cartmini/empty-cart.png";
@@ -13,12 +12,10 @@ const CartMiniSidebar = () => {
   const { total } = useCartInfo();
   const dispatch = useDispatch();
 
-  // handle remove product
   const handleRemovePrd = (prd) => {
     dispatch(remove_product(prd));
   };
 
-  // handle close cart mini
   const handleCloseCartMini = () => {
     dispatch(closeCartMini());
   };
@@ -54,12 +51,12 @@ const CartMiniSidebar = () => {
                   <div key={item._id} className="cartmini__widget-item">
                     <div className="cartmini__thumb">
                       <Link href={`/product-details/${item._id}`}>
-                        <Image
-                          src={item.img}
+                        {/* <Image
+                          src={item[i].img}
                           width={70}
                           height={60}
                           alt="product img"
-                        />
+                        /> */}
                       </Link>
                     </div>
                     <div className="cartmini__content">
@@ -79,7 +76,7 @@ const CartMiniSidebar = () => {
                           </span>
                         ) : (
                           <span className="cartmini__price">
-                            ৳{item.price.toFixed(2)}
+                            {/* ৳{item.price.toFixed(2)} */}
                           </span>
                         )}
                         <span className="cartmini__quantity">

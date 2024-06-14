@@ -3,9 +3,16 @@ import DetailsThumbWrapper from "./details-thumb-wrapper";
 import DetailsWrapper from "./details-wrapper";
 import DetailsTabNav from "./details-tab-nav";
 import RelatedProducts from "./related-products";
+import { resetOrderQuantity } from "@/redux/features/cartSlice";
+import { useDispatch } from "react-redux";
 
 const ProductDetailsArea = ({ productItem }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetOrderQuantity());
+  }, [activeIndex, dispatch]);
 
   return (
     <section className="tp-product-details-area">

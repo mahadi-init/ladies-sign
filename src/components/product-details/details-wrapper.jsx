@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { CompareTwo, WishlistTwo } from "@/svg";
 import DetailsBottomInfo from "./details-bottom-info";
 import ProductQuantity from "./product-quantity";
-import { add_cart_product } from "@/redux/features/cartSlice";
-import { add_to_wishlist } from "@/redux/features/wishlist-slice";
-import { add_to_compare } from "@/redux/features/compareSlice";
+import {
+  add_cart_product,
+  resetOrderQuantity,
+} from "@/redux/features/cartSlice";
 import { handleModalClose } from "@/redux/features/productModalSlice";
 
 const DetailsWrapper = ({
@@ -24,21 +24,17 @@ const DetailsWrapper = ({
     const variant = prd.variants[activeIndex];
 
     const product = {
+      _id: prd._id,
       name: prd.name,
-      img: variant.img,
-      price: variant.price,
+      sku: prd.sku,
       color: variant.color,
+      img: variant.img,
+      size: variant.size,
+      price: variant.price,
+      quantity: variant.quantity,
     };
-    console.log("🚀 ~ handleAddProduct ~ prd:", prd);
     dispatch(add_cart_product(product));
-  };
-
-  const handleWishlistProduct = (prd) => {
-    dispatch(add_to_wishlist(prd));
-  };
-
-  const handleCompareProduct = (prd) => {
-    dispatch(add_to_compare(prd));
+    dispatch(resetOrderQuantity());
   };
 
   const getVariantCount = () => {
@@ -98,9 +94,21 @@ const DetailsWrapper = ({
         )}
       </div>
 
+      <hr />
+
       <div className="tp-product-details-query-item d-flex align-items-center">
         <span>SKU: </span>
         <p>{sku}</p>
+      </div>
+
+      <div className="tp-product-details-query-item d-flex align-items-center">
+        <span>Size: </span>
+        <p>{variants[activeIndex]?.size}</p>
+      </div>
+
+      <div className="tp-product-details-query-item d-flex align-items-center">
+        <span>Item Left: </span>
+        <p>{variants[activeIndex]?.quantity}</p>
       </div>
 
       {variants?.some((item) => item?.color && item?.color) && (
@@ -133,6 +141,8 @@ const DetailsWrapper = ({
         </div>
       )}
 
+      <hr />
+
       <div className="tp-product-details-action-wrapper">
         <h3 className="tp-product-details-action-title">Quantity</h3>
         <div className="tp-product-details-action-item-wrapper d-sm-flex align-items-center">
@@ -153,28 +163,6 @@ const DetailsWrapper = ({
             Buy Now
           </button>
         </Link>
-      </div>
-
-      <div className="tp-product-details-action-sm">
-        <button
-          disabled={status === "out-of-stock"}
-          onClick={() => handleCompareProduct(productItem)}
-          type="button"
-          className="tp-product-details-action-sm-btn"
-        >
-          <CompareTwo />
-          Compare
-        </button>
-
-        <button
-          disabled={status === "out-of-stock"}
-          onClick={() => handleWishlistProduct(productItem)}
-          type="button"
-          className="tp-product-details-action-sm-btn"
-        >
-          <WishlistTwo />
-          Add Wishlist
-        </button>
       </div>
 
       {detailsBottom && <DetailsBottomInfo sku={sku} />}

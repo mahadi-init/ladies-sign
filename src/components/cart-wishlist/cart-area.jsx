@@ -10,6 +10,7 @@ import RenderCartProgress from "../common/render-cart-progress";
 const CartArea = () => {
   const { cart_products } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
   return (
     <>
       <section className="tp-cart-area pb-120">
@@ -29,13 +30,16 @@ const CartArea = () => {
                   <div className="cartmini__shipping">
                     <RenderCartProgress />
                   </div>
+
                   <table className="table">
                     <thead>
                       <tr>
                         <th colSpan="2" className="tp-cart-header-product">
                           Product
                         </th>
-                        <th className="tp-cart-header-price">Price</th>
+                        <th className="tp-cart-header-price">Color</th>
+                        <th className="tp-cart-header-price">Size</th>
+                        <th className="tp-cart-header-price">Total</th>
                         <th className="tp-cart-header-quantity">Quantity</th>
                         <th></th>
                       </tr>
@@ -47,6 +51,7 @@ const CartArea = () => {
                     </tbody>
                   </table>
                 </div>
+
                 <div className="tp-cart-bottom">
                   <div className="row align-items-end">
                     <div className="col-xl-6 col-md-8"></div>

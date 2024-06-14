@@ -31,7 +31,6 @@ const useCheckoutSubmit = () => {
   const router = useRouter();
   const shippingCost = 120;
 
-  //set
   useEffect(() => {
     setValue("name", shipping_info.name);
     setValue("address", shipping_info.address);

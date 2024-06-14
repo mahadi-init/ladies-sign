@@ -14,18 +14,8 @@ const ShopListItem = ({ product }) => {
   const { _id, name, price, discount, description, variants } = product || {};
   const dispatch = useDispatch();
 
-  // handle add product
   const handleAddProduct = (prd) => {
     dispatch(add_cart_product(prd));
-  };
-  // handle wishlist product
-  const handleWishlistProduct = (prd) => {
-    dispatch(add_to_wishlist(prd));
-  };
-
-  // handle compare product
-  const handleCompareProduct = (prd) => {
-    dispatch(add_to_compare(prd));
   };
 
   return (
@@ -52,49 +42,14 @@ const ShopListItem = ({ product }) => {
                 Quick View
               </span>
             </button>
-            <button
-              type="button"
-              onClick={() => handleWishlistProduct(product)}
-              className="tp-product-action-btn-2 tp-product-add-to-wishlist-btn"
-            >
-              <Wishlist />
-              <span className="tp-product-tooltip tp-product-tooltip-right">
-                Add To Wishlist
-              </span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleCompareProduct(product)}
-              className="tp-product-action-btn-2 tp-product-add-to-compare-btn"
-            >
-              <CompareThree />
-              <span className="tp-product-tooltip tp-product-tooltip-right">
-                Add To Compare
-              </span>
-            </button>
           </div>
         </div>
       </div>
       <div className="tp-product-list-content">
         <div className="tp-product-content-2 pt-15">
-          {/* <div className="tp-product-tag-2">
-            {tags?.map((t, i) => (
-              <a key={i} href="#">
-                {t}
-              </a>
-            ))}
-          </div> */}
           <h3 className="tp-product-title-2">
             <Link href={`/product-details/${_id}`}>{name}</Link>
           </h3>
-          {/* <div className="tp-product-rating-icon tp-product-rating-icon-2">
-            <Rating
-              allowFraction
-              size={16}
-              initialValue={ratingVal}
-              readonly={true}
-            />
-          </div> */}
           <div className="tp-product-price-wrapper-2">
             {discount > 0 ? (
               <>

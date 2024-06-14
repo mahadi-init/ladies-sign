@@ -82,7 +82,7 @@ export default function Balance() {
     <>
       <div class="card w-full">
         <div class="card-body">
-          <h5 class="card-title">Balance : {info?.data.balance ?? 0} Tk.</h5>
+          <h5 class="card-title">Balance : {info?.data?.balance ?? 0} Tk.</h5>
           <h6 style={{ textAlign: "center", marginTop: "24px" }}>
             Last Transacions
           </h6>
@@ -101,10 +101,10 @@ export default function Balance() {
               <tr>
                 <th scope="row">1</th>
                 <td>
-                  {new Date(transaction?.data.createdAt).toLocaleTimeString()}
+                  {new Date(transaction?.data?.createdAt).toLocaleTimeString()}
                 </td>
-                <td>{new Date(transaction?.data.createdAt).toDateString()}</td>
-                <td>{transaction?.data.paymentID}</td>
+                <td>{new Date(transaction?.data?.createdAt).toDateString()}</td>
+                <td>{transaction?.data?.paymentID}</td>
                 <td style={{ color: "green", fontWeight: "700" }}>
                   {transaction?.data.transactionStatus.toUpperCase()}
                 </td>
@@ -118,18 +118,18 @@ export default function Balance() {
               <tr>
                 <th scope="row">1</th>
                 <td>
-                  {new Date(withdraw?.data.createdAt).toLocaleTimeString()}
+                  {new Date(withdraw?.data?.createdAt).toLocaleTimeString()}
                 </td>
-                <td>{new Date(withdraw?.data.createdAt).toDateString()}</td>
-                <td>{transaction?.data._id}</td>
+                <td>{new Date(withdraw?.data?.createdAt).toDateString()}</td>
+                <td>{transaction?.data?._id}</td>
                 <td
                   style={{
                     color:
-                      withdraw?.data.status === "PENDING" ? "red" : "green",
+                      withdraw?.data?.status === "PENDING" ? "red" : "green",
                     fontWeight: "700",
                   }}
                 >
-                  {withdraw?.data.status.toUpperCase()}
+                  {withdraw?.data?.status.toUpperCase()}
                 </td>
                 <th scope="row" style={{ color: "red" }}>
                   Withdraw

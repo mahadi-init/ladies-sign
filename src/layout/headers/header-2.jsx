@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-// internal
 import Menus from "./header-com/menus";
 import useSticky from "@/hooks/use-sticky";
 import useCartInfo from "@/hooks/use-cart-info";
 import { openCartMini } from "@/redux/features/cartSlice";
 import CartMiniSidebar from "@/components/common/cart-mini-sidebar";
-import { CartTwo, Compare, Menu, Wishlist, Search } from "@/svg";
+import { CartTwo, Menu, Search } from "@/svg";
 import useSearchFormSubmit from "@/hooks/use-search-form-submit";
 import OffCanvas from "@/components/common/off-canvas";
 
 const HeaderTwo = ({ style_2 = false }) => {
-  const { wishlist } = useSelector((state) => state.wishlist);
   const [isOffCanvasOpen, setIsCanvasOpen] = useState(false);
   const { setSearchText, handleSubmit, searchText } = useSearchFormSubmit();
   const { quantity } = useCartInfo();
@@ -77,6 +75,7 @@ const HeaderTwo = ({ style_2 = false }) => {
                       </nav>
                     </div>
                   </div>
+
                   <div className="col-xl-5 col-lg-7 col-md-7 col-sm-8 col-6">
                     <div className="tp-header-bottom-right d-flex align-items-center justify-content-end pl-30">
                       <div className="tp-header-search-2 d-none d-sm-block">
@@ -92,26 +91,8 @@ const HeaderTwo = ({ style_2 = false }) => {
                           </button>
                         </form>
                       </div>
+
                       <div className="tp-header-action d-flex align-items-center ml-30">
-                        <div className="tp-header-action-item d-none d-lg-block">
-                          <Link
-                            href="/compare"
-                            className="tp-header-action-btn"
-                          >
-                            <Compare />
-                          </Link>
-                        </div>
-                        <div className="tp-header-action-item d-none d-lg-block">
-                          <Link
-                            href="/wishlist"
-                            className="tp-header-action-btn"
-                          >
-                            <Wishlist />
-                            <span className="tp-header-action-badge">
-                              {wishlist.length}
-                            </span>
-                          </Link>
-                        </div>
                         <div className="tp-header-action-item">
                           <button
                             onClick={() => dispatch(openCartMini())}
@@ -123,6 +104,7 @@ const HeaderTwo = ({ style_2 = false }) => {
                             </span>
                           </button>
                         </div>
+
                         <div className="tp-header-action-item tp-header-hamburger mr-20 d-xl-none">
                           <button
                             onClick={() => setIsCanvasOpen(true)}
@@ -141,18 +123,12 @@ const HeaderTwo = ({ style_2 = false }) => {
           </div>
         </div>
       </header>
-
-      {/* cart mini sidebar start */}
       <CartMiniSidebar />
-      {/* cart mini sidebar end */}
-
-      {/* off canvas start */}
       <OffCanvas
         isOffCanvasOpen={isOffCanvasOpen}
         setIsCanvasOpen={setIsCanvasOpen}
         categoryType="fashion"
       />
-      {/* off canvas end */}
     </>
   );
 };

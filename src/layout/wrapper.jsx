@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { useRouter } from "next/router";
-// internal
 import BackToTopCom from "@/components/common/back-to-top";
 import ProductModal from "@/components/common/product-modal";
 import {
@@ -38,9 +36,7 @@ const Wrapper = ({ children }) => {
       {children}
       <BackToTopCom />
       <ToastContainer />
-      {/* product modal start */}
       {productItem && <ProductModal />}
-      {/* product modal end */}
     </div>
   );
 };

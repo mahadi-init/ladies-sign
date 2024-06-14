@@ -24,6 +24,7 @@ const useCartInfo = () => {
     setQuantity(cart.quantity);
     setTotal(cart.total);
   }, [cart_products]);
+
   return {
     quantity,
     total,

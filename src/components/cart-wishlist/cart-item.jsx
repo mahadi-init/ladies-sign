@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-// internal
 import { Close, Minus, Plus } from "@/svg";
 import {
   add_cart_product,
@@ -11,46 +10,54 @@ import {
 } from "@/redux/features/cartSlice";
 
 const CartItem = ({ product }) => {
-  const { _id, name, variants, orderQuantity = 0 } = product || {};
+  const {
+    _id,
+    name,
+    img,
+    price,
+    size,
+    color,
+    orderQuantity = 0,
+  } = product || {};
 
   const dispatch = useDispatch();
 
-  // handle add product
   const handleAddProduct = (prd) => {
     dispatch(add_cart_product(prd));
   };
-  // handle decrement product
+
   const handleDecrement = (prd) => {
     dispatch(quantityDecrement(prd));
   };
 
-  // handle remove product
   const handleRemovePrd = (prd) => {
     dispatch(remove_product(prd));
   };
 
   return (
     <tr>
-      {/* img */}
       <td className="tp-cart-img">
         <Link href={`/product-details/${_id}`}>
-          <Image
-            src={variants[0]?.img}
-            alt="product img"
-            width={70}
-            height={100}
-          />
+          <Image src={img} alt="product img" width={70} height={100} />
         </Link>
       </td>
-      {/* title */}
+
       <td className="tp-cart-title">
         <Link href={`/product-details/${_id}`}>{name}</Link>
       </td>
-      {/* price */}
+
       <td className="tp-cart-price">
-        <span>৳{(variants[0]?.price * orderQuantity).toFixed(2)}</span>
+        <span>{color}</span>
       </td>
-      {/* quantity */}
+
+      <td className="tp-cart-price">
+        <span>{size}</span>
+      </td>
+
+      <td className="tp-cart-price">
+        <span>৳{(price * orderQuantity).toFixed(2)}</span>
+      </td>
+
       <td className="tp-cart-quantity">
         <div className="tp-product-quantity mt-10 mb-10">
           <span
@@ -73,7 +80,7 @@ const CartItem = ({ product }) => {
           </span>
         </div>
       </td>
-      {/* action */}
+
       <td className="tp-cart-action">
         <button
           onClick={() => handleRemovePrd({ title: name, id: _id })}

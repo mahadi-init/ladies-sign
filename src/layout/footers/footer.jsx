@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-// internal
 import pay from "@assets/img/footer/footer-pay-3.png";
 import social_data from "@/data/social-data";
 import { Email, Location } from "@/svg";

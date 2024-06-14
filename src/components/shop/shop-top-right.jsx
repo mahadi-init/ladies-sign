@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-// internal
 import { Filter } from "@/svg";
 import NiceSelect from "@/ui/nice-select";
 import { handleFilterSidebarOpen } from "@/redux/features/shop-filter-slice";

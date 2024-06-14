@@ -10,10 +10,7 @@ import Header from "@/layout/headers/header";
 import Wrapper from "@/layout/wrapper";
 import Footer from "@/layout/footers/footer";
 import React from "react";
-import CategoryView from "@/components/categories/category-view";
-import OfferProducts from "@/components/products/electronics/offer-products";
 
-// TODO: SEARCH, BANNER, ADD MORE PRODUCTS
 export default function Home() {
   return (
     <Wrapper>

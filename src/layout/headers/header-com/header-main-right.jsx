@@ -1,17 +1,14 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
-// internal
+import { useDispatch } from "react-redux";
 import useCartInfo from "@/hooks/use-cart-info";
-import { CartTwo, Compare, Menu, Wishlist } from "@/svg";
+import { CartTwo, Menu } from "@/svg";
 import { openCartMini } from "@/redux/features/cartSlice";
 import HeaderUserAuth from "./header-user-auth";
-import { ListOrderedIcon } from "lucide-react";
 
 const HeaderMainRight = ({ setIsCanvasOpen }) => {
-  const { wishlist } = useSelector((state) => state.wishlist);
   const { quantity } = useCartInfo();
   const dispatch = useDispatch();
+
   return (
     <div className="tp-header-main-right d-flex align-items-center justify-content-end">
       <div className="tp-header-login d-none d-lg-block">
@@ -19,18 +16,8 @@ const HeaderMainRight = ({ setIsCanvasOpen }) => {
           <HeaderUserAuth />
         </div>
       </div>
+
       <div className="tp-header-action d-flex align-items-center ml-50">
-        <div className="tp-header-action-item d-none d-lg-block">
-          <Link href="/compare" className="tp-header-action-btn">
-            <Compare />
-          </Link>
-        </div>
-        <div className="tp-header-action-item d-none d-lg-block">
-          <Link href="/wishlist" className="tp-header-action-btn">
-            <Wishlist />
-            <span className="tp-header-action-badge">{wishlist.length}</span>
-          </Link>
-        </div>
         <div className="tp-header-action-item">
           <button
             onClick={() => dispatch(openCartMini())}
@@ -41,6 +28,7 @@ const HeaderMainRight = ({ setIsCanvasOpen }) => {
             <span className="tp-header-action-badge">{quantity}</span>
           </button>
         </div>
+
         <div className="tp-header-action-item d-lg-none">
           <button
             onClick={() => setIsCanvasOpen(true)}
