@@ -15,7 +15,7 @@ const ShopPage = ({ query }) => {
   const [priceValue, setPriceValue] = useState([0, 0]);
   const [selectValue, setSelectValue] = useState("");
   const [currPage, setCurrPage] = useState(1);
-  // Load the maximum price once the products have been loaded
+
   useEffect(() => {
     if (!isLoading && !isError && products?.data?.length > 0) {
       const maxPrice = products.data.reduce((max, product) => {
@@ -25,18 +25,15 @@ const ShopPage = ({ query }) => {
     }
   }, [isLoading, isError, products]);
 
-  // handleChanges
   const handleChanges = (val) => {
     setCurrPage(1);
     setPriceValue(val);
   };
 
-  // selectHandleFilter
   const selectHandleFilter = (e) => {
     setSelectValue(e.value);
   };
 
-  // other props
   const otherProps = {
     priceFilterValues: {
       priceValue,
@@ -46,12 +43,13 @@ const ShopPage = ({ query }) => {
     currPage,
     setCurrPage,
   };
-  // decide what to render
+
   let content = null;
 
   if (isLoading) {
     content = <ShopLoader loading={isLoading} />;
   }
+
   if (!isLoading && isError) {
     content = (
       <div className="pb-80 text-center">
@@ -59,13 +57,14 @@ const ShopPage = ({ query }) => {
       </div>
     );
   }
+
   if (!isLoading && !isError && products?.data?.length === 0) {
     content = <ErrorMsg msg="No Products found!" />;
   }
+
   if (!isLoading && !isError && products?.data?.length > 0) {
-    // products
     let product_items = products.data;
-    // select short filtering
+
     if (selectValue) {
       if (selectValue === "Default Sorting") {
         product_items = products.data;
@@ -81,22 +80,21 @@ const ShopPage = ({ query }) => {
         product_items = products.data
           .slice()
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      } else if (selectValue === "On Sale") {
+      } else if (selectValue === "IN-STOCK") {
         product_items = products.data.filter((p) => p.discount > 0);
       } else {
         product_items = products.data;
       }
     }
-    // price filter
+
     product_items = product_items.filter(
       (p) => p.price >= priceValue[0] && p.price <= priceValue[1],
     );
 
-    // status filter
     if (query.status) {
-      if (query.status === "on-sale") {
+      if (query.status === "ON-SALE") {
         product_items = product_items.filter((p) => p.discount > 0);
-      } else if (query.status === "in-stock") {
+      } else if (query.status === "IN-STOCK") {
         product_items = product_items.filter((p) => p.status === "IN-STOCK");
       }
     }
@@ -156,7 +154,7 @@ const ShopPage = ({ query }) => {
 
     content = (
       <>
-        <ShopArea
+        {/* <ShopArea
           all_products={products.data}
           products={product_items}
           otherProps={otherProps}
@@ -164,10 +162,11 @@ const ShopPage = ({ query }) => {
         <ShopFilterOffCanvas
           all_products={products.data}
           otherProps={otherProps}
-        />
+        /> */}
       </>
     );
   }
+
   return (
     <Wrapper>
       <SEO pageTitle="Shop" />

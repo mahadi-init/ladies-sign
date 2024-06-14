@@ -69,11 +69,11 @@ export const cartSlice = createSlice({
       state.orderQuantity = 1;
     },
 
-    increment: (state, { payload }) => {
+    increment: (state) => {
       state.orderQuantity = state.orderQuantity + 1;
     },
 
-    decrement: (state, { payload }) => {
+    decrement: (state) => {
       state.orderQuantity =
         state.orderQuantity > 1
           ? state.orderQuantity - 1
@@ -82,7 +82,11 @@ export const cartSlice = createSlice({
 
     quantityDecrement: (state, { payload }) => {
       state.cart_products.map((item) => {
-        if (item._id === payload._id) {
+        if (
+          item._id === payload._id &&
+          item.color === payload.color &&
+          item.size === payload.size
+        ) {
           if (item.orderQuantity > 1) {
             item.orderQuantity = item.orderQuantity - 1;
           }
@@ -94,18 +98,23 @@ export const cartSlice = createSlice({
 
     remove_product: (state, { payload }) => {
       state.cart_products = state.cart_products.filter(
-        (item) => item._id !== payload.id,
+        (item) =>
+          !(
+            item._id === payload.id &&
+            item.color === payload.color &&
+            item.size === payload.size
+          ),
       );
 
       setLocalStorage("cart_products", state.cart_products);
-      notifyError(`${payload.title} Remove from cart`);
+      notifyError(`${payload.name} Removed from cart`);
     },
 
-    get_cart_products: (state, action) => {
+    get_cart_products: (state) => {
       state.cart_products = getLocalStorage("cart_products");
     },
 
-    initialOrderQuantity: (state, { payload }) => {
+    initialOrderQuantity: (state) => {
       state.orderQuantity = 1;
     },
 
@@ -119,11 +128,11 @@ export const cartSlice = createSlice({
       setLocalStorage("cart_products", state.cart_products);
     },
 
-    openCartMini: (state, { payload }) => {
+    openCartMini: (state) => {
       state.cartMiniOpen = true;
     },
 
-    closeCartMini: (state, { payload }) => {
+    closeCartMini: (state) => {
       state.cartMiniOpen = false;
     },
   },

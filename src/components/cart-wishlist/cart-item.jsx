@@ -83,7 +83,9 @@ const CartItem = ({ product }) => {
 
       <td className="tp-cart-action">
         <button
-          onClick={() => handleRemovePrd({ title: name, id: _id })}
+          onClick={() =>
+            handleRemovePrd({ id: _id, name: name, color: color, size: size })
+          }
           className="tp-cart-action-btn"
         >
           <Close />
