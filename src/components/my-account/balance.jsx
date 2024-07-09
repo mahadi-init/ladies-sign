@@ -26,11 +26,14 @@ export default function Balance() {
   const [inputValue, setInput] = useState();
   const router = useRouter();
 
+  console.log(transaction);
+  console.log(withdraw);
+
   const submitHandler = async () => {
     if (doDeposit) {
-      depositHandler();
+      await depositHandler();
     } else {
-      withdrawHandler();
+      await withdrawHandler();
     }
   };
 
@@ -52,10 +55,10 @@ export default function Balance() {
 
     const res = await addDeposit(customData);
 
-    if (res.data.success) {
-      router.push(res.data.data.bkashURL);
+    if (res?.data?.success) {
+      await router.push(res?.data?.data?.bkashURL);
     } else {
-      notifyError("Deposite Failed");
+      notifyError("Deposit Failed");
     }
   };
 
@@ -71,7 +74,7 @@ export default function Balance() {
       bkash: user.phone,
     });
 
-    if (res.data.success) {
+    if (res?.data?.success) {
       notifySuccess("Withdraw request send");
     } else {
       notifyError("Withdraw request failed");
@@ -80,13 +83,13 @@ export default function Balance() {
 
   return (
     <>
-      <div class="card w-full">
-        <div class="card-body">
-          <h5 class="card-title">Balance : {info?.data?.balance ?? 0} Tk.</h5>
+      <div className="card w-full">
+        <div className="card-body">
+          <h5 className="card-title">Balance : {info?.data?.balance ?? 0} Tk.</h5>
           <h6 style={{ textAlign: "center", marginTop: "24px" }}>
-            Last Transacions
+            Last Transactions
           </h6>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -106,7 +109,7 @@ export default function Balance() {
                 <td>{new Date(transaction?.data?.createdAt).toDateString()}</td>
                 <td>{transaction?.data?.paymentID}</td>
                 <td style={{ color: "green", fontWeight: "700" }}>
-                  {transaction?.data.transactionStatus.toUpperCase()}
+                  {transaction?.data?.transactionStatus.toUpperCase()}
                 </td>
                 <th scope="row" style={{ color: "blue" }}>
                   Deposit
@@ -139,7 +142,7 @@ export default function Balance() {
           </table>
           <div className="mt-20 d-flex gap-5">
             <a
-              class="btn btn-primary"
+              className="btn btn-primary"
               onClick={() => {
                 setDoWithdraw(false);
                 setDoDeposit(!doDeposit);
@@ -148,7 +151,7 @@ export default function Balance() {
               Deposit
             </a>
             <a
-              class="btn btn-secondary"
+              className="btn btn-secondary"
               onClick={() => {
                 setDoDeposit(false);
                 setDoWithdraw(!doWithdraw);
@@ -157,19 +160,19 @@ export default function Balance() {
               Withdraw
             </a>
           </div>
-          <div class="input-group mb-3 mt-10">
+          <div className="input-group mb-3 mt-10">
             {(doDeposit || doWithdraw) && (
               <>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   placeholder={doDeposit ? "Deposit Amount" : "Withdraw Amount"}
                   aria-label={doDeposit ? "Deposit Amount" : "Withdraw Amount"}
                   aria-describedby="basic-addon1"
                   onChange={(e) => setInput(e.target.value)}
                 />
                 <a
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   style={{
                     display: "flex",
                     justifyContent: "center",

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Link from "next/link";
-import DetailsBottomInfo from "./details-bottom-info";
-import ProductQuantity from "./product-quantity";
 import {
   add_cart_product,
   resetOrderQuantity,
 } from "@/redux/features/cartSlice";
 import { handleModalClose } from "@/redux/features/productModalSlice";
+import Link from "next/link";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import DetailsBottomInfo from "./details-bottom-info";
+import ProductQuantity from "./product-quantity";
 
 const DetailsWrapper = ({
   productItem,
@@ -33,6 +33,7 @@ const DetailsWrapper = ({
       price: variant.price,
       quantity: variant.quantity,
     };
+
     dispatch(add_cart_product(product));
     dispatch(resetOrderQuantity());
   };
@@ -146,11 +147,11 @@ const DetailsWrapper = ({
       <div className="tp-product-details-action-wrapper">
         <h3 className="tp-product-details-action-title">Quantity</h3>
         <div className="tp-product-details-action-item-wrapper d-sm-flex align-items-center">
-          <ProductQuantity />
+          <ProductQuantity quantity={variants[activeIndex]?.quantity} />
           <div className="tp-product-details-add-to-cart mb-15 w-100">
             <button
               onClick={() => handleAddProduct(productItem)}
-              disabled={status === "out-of-stock"}
+              disabled={status === "OUT-OF-STOCK"}
               className="tp-product-details-add-to-cart-btn w-100"
             >
               Add To Cart

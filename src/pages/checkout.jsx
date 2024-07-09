@@ -1,6 +1,4 @@
 import React from "react";
-
-// internal
 import SEO from "@/components/seo";
 import Wrapper from "@/layout/wrapper";
 import HeaderTwo from "@/layout/headers/header-2";

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { resetOrderQuantity } from "@/redux/features/cartSlice";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import DetailsTabNav from "./details-tab-nav";
 import DetailsThumbWrapper from "./details-thumb-wrapper";
 import DetailsWrapper from "./details-wrapper";
-import DetailsTabNav from "./details-tab-nav";
 import RelatedProducts from "./related-products";
-import { resetOrderQuantity } from "@/redux/features/cartSlice";
-import { useDispatch } from "react-redux";
 
 const ProductDetailsArea = ({ productItem }) => {
   const [activeIndex, setActiveIndex] = useState(0);

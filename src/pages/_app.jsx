@@ -16,12 +16,12 @@ const NEXT_PUBLIC_GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 export default function App({ Component, pageProps }) {
   return (
-    <GoogleOAuthProvider clientId={NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+    // <GoogleOAuthProvider clientId={NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <Provider store={store}>
         <div id="root">
           <Component {...pageProps} />
         </div>
       </Provider>
-    </GoogleOAuthProvider>
+    // </GoogleOAuthProvider>
   );
 }

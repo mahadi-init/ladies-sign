@@ -1,13 +1,20 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Minus, Plus } from "@/svg";
 import { decrement, increment } from "@/redux/features/cartSlice";
+import { Minus, Plus } from "@/svg";
+import { notifyError } from "@/utils/toast";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProductQuantity = () => {
+const ProductQuantity = ({ quantity }) => {
   const dispatch = useDispatch();
   const { orderQuantity } = useSelector((state) => state.cart);
 
   const handleIncrease = () => {
+    console.log(orderQuantity, quantity);
+
+    if (orderQuantity >= quantity) {
+      notifyError("Max quantity reached");
+      return;
+    }
+
     dispatch(increment());
   };
 
